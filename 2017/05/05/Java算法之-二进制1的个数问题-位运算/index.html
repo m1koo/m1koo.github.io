@@ -122,17 +122,118 @@
 
 <div id="content-outer">
   <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a4.jpg)" >
+  <h2>Java算法之--二进制1的个数问题--位运算</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-04T19:41:30.000Z">
+          2017-05-05
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>大家好我是M1ko，今天给大家分享的算法是关于二进制运算的问题，说到二进制，一个程序员第一个反应肯定是位运算，这一方面也一直是自己的薄弱点，好的废话不多说开车出发。<br>首先上题目地址：<a href="http://exercise.acmcoder.com/online/online_judge_ques?ques_id=1667&amp;konwledgeId=134" target="_blank" rel="external">赛码网</a><br>上题目：<br><img src="http://img.blog.csdn.net/20160917121835073" alt="这里写图片描述"><br>依旧是高清无码的无厘头题目。这种题目一上来很容易上头，开始钻牛角尖想各种for循环。其实我们要记住一句话：超过双重循环的算法都不是好算法。<br>这时候我们要转变思路，用n个一来求得十进制必然是十分麻烦的因为总的位数是不确定的，我们是否可以算出十进制中的1的个数呢？当求得的1的个数等于输入的个数那么计数器加一问题便迎刃而解。<br>答案是肯定的，那么算法应该是怎么样的呢？这时候我们肯定要想到位运算符。&gt;&gt; , &lt;&lt; , &gt;&gt;&gt;<br>我们要计算1的个数必然还要使用一个运算符&amp;，当同一位上的两个数是1的时候，结果是1。但我们不知道究竟有多少位数呀？这是候就要用到位运算符了。<br>这里给大家分享两种思路：<br>1.直接算法：</p>
+<pre><code>static int BitCount( int n)
+    {
+        int c =0 ; // 计数器
+        while (n &gt;0)
+        {
+            if((n &amp;1) ==1) // 当前位是1
+                ++c ; // 计数器加1
+            n &gt;&gt;=1 ; // 移位
+        }
+        return c ;
+    }
+</code></pre><p>举个例子大家就会明白该算法的原理，110101当他与1进行&amp;运算时，可以想象为110101 与 000001进行运算。当最末位为1的时候结果就是1，这时候我们进行右移。最终移动完之后为0跳出循环。<br>但是大家想一想，Java中的Int有多少位？4字节32位对不对，也就是说我们for循环要进行32次才能结束。是不是不够优雅呢？</p>
+<p>2.快速算法：</p>
+<pre><code>static int BitCount2(int n){
+        int count = 0;
+        while(n&gt;0){
+            n = n&amp;(n-1);
+            count ++;
+        }
+        return count;
+    }
+</code></pre><p>看样子跟上一个算法很相似，但是n&amp;(n-1)是什么鬼？<br>同样给大家举几个例子，n = 3。转化为二进制是11.3-1=2 23转化为二进制是10，有没有发现呢其实十进制与二进制的一个很大的联系就是最后一位加一减一。很神奇的是他们是相通的。<br>110101&amp;110100–&gt;110100<br>110100&amp;110011–&gt;110000<br>110000&amp;101111–&gt;100000<br>.<br>想必聪明的我们都明白了，这个算法的原理其实就是每次循环去掉最末尾的1，这样我们只需要4次循环就可以解决问题了。是不是很神奇呢=-=。</p>
+<p>最终题目解法：</p>
+<pre><code>import java.util.Scanner;
+
+public class Main {
+    private static Scanner cin;
+
+    public static void main(String arg[]){
+        cin = new Scanner(System.in);
+        int l = cin.nextInt();
+        int m = cin.nextInt();
+        int r = cin.nextInt();
+        if(l&gt;m){
+            System.out.println(-1);
+            return;
+        }
+        int i;
+        int numCount = 0;
+        for(i=l;i&lt;=m;i++){
+            if(BitCount2(i)==r){
+                numCount++;
+            }
+        }
+        if(numCount==0){
+            System.out.println(-1);
+        }
+        else{
+            System.out.println(numCount);
+        }
+
+    }
+    static int BitCount( int n)
+    {
+        int c =0 ; // 计数器
+        while (n &gt;0)
+        {
+            if((n &amp;1) ==1) // 当前位是1
+                ++c ; // 计数器加1
+            n &gt;&gt;=1 ; // 移位
+        }
+        return c ;
+    }
+    static int BitCount2(int n){
+        int count = 0;
+        while(n&gt;0){
+            n = n&amp;(n-1);
+            count ++;
+        }
+        return count;
+    }
+}
+</code></pre>
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/05/Java后台学习记录，Mysql-多个timestamp，xml中使用小于号，Mybatisdao接口多个参数函数错误/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
-<div class="tags">
-  
-    <div id="archive">
-        
-          <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-动态化开发/">Android 动态化开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-校园网登录/">Android 校园网登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello/">Hello</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua基础语法/">Lua基础语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM架构最终配置-Spring回滚机制/">SSM架构最终配置 Spring回滚机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timestamp-有两个默认值/">Timestamp 有两个默认值</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uri真实路径/">Uri真实路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WifiDirect/">WifiDirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp-xml小于号-Mybatisdao多参数/">timestamp xml小于号 Mybatisdao多参数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二进制一个数/">二进制一个数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股神算法/">股神算法</a></li></ul>
-        
-    </div>
-  
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/03/Android-通过Java代码生成创建界面。/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
 
   </div>
 </div>

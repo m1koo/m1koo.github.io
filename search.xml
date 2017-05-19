@@ -3,14 +3,1005 @@
   
     
     <entry>
+      <title><![CDATA[Lua基础语句总结]]></title>
+      <url>/2017/05/20/Lua%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<p>–print(“hello world”)</p>
+<p>–<br>–函数<br>–与c java相同传入的是值<br>function method(a,b)<br>    temp = a<br>    a=b<br>    b=temp<br>    print(a,b)<br>end</p>
+<p>–<br>–数组（字典）<br>–array[1] 的时候无法使用array.1<br>array ={}<br>array[“key”] = “fa”<br>print(array.key)</p>
+<p>–<br>–循环<br>– c中的do while<br>local i = 0<br>repeat<br>    i = i+1<br>    print(“repeat 循环”)<br>    until(i&gt;2)</p>
+<p>–for<br>–for 步长<br>for var = 1,6,2.5 do<br>    print(“for步长循环”)<br>end</p>
+<p>–字典循环<br>days = {“faf”,”fdaee”,”ere”}<br>days[1] = “fdafafadfdafad”<br>for i,v in ipairs(days) do<br>    print(i,v)<br>end</p>
+<p>–判断<br>if(0) then<br>    print(“0是true”)<br>end</p>
+<p>–函数返回多个值<br>function m(a,b)<br>    return b,a<br>end</p>
+<p>c,d = m(1,3)<br>print(“函数的多个返回值”,c,d)</p>
+<p>–逻辑运算符<br>–and or not<br>–每一个变量对应着 一个值，b = false<br>a,b = true</p>
+<p>if a and b then<br>    print(“a and b”)<br>end</p>
+<p>if a or b then<br>    print(“a or b”)<br>end</p>
+<p>if a and not b then<br>    print(“not a and b”)<br>end</p>
+<p>–连接字符串<br>a=’hello ‘ b=’miko’<br>print(a..b)<br>print(“#表示字符串长度”,#a)</p>
+<p>–String 操作<br>str = “Hello WORLD”<br>–全部大小写<br>print(string.upper(str))<br>print(string.lower(str))<br>–替换<br>print(string.gsub(str,’llo’,’heh’))</p>
+<p>print(string.find(str,’e’))<br>–反转<br>print(string.reverse(str))</p>
+<p>–面向对象<br>– Meta class<br>Shape = {area = 0}</p>
+<p>– 基础类方法 new<br>function Shape:new (o,side)<br>  o = o or {}<br>  setmetatable(o, self)<br>  self.__index = self<br>  side = side or 0<br>  self.area = side*side;<br>  return o<br>end</p>
+<p>– 基础类方法 printArea<br>function Shape:printArea ()<br>  print(“面积为 “,self.area)<br>end</p>
+<p>– 创建对象<br>myshape = Shape:new(nil,10)</p>
+<p>myshape:printArea()</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Lua </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Lua基础语法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ Java后台学习记录 Timestamp 两个默认值]]></title>
+      <url>/2017/05/06/Java%E5%90%8E%E5%8F%B0%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-Timestamp-%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%BB%98%E8%AE%A4%E5%80%BC/</url>
+      <content type="html"><![CDATA[<p>N: Mysql 中Timestamp 有两个默认值，current_timestamp   on update current_timestamp<br>1.current_timestamp:当要向数据库执行insert操作时，如果有个timestamp字段属性设为 CURRENT_TIMESTAMP，则无论这个字段有没有set值都插入当前系统时间<br>2.on update current_timestamp: 当执行update操作是，并且字段有ON UPDATE CURRENT_TIMESTAMP属性。则字段无论值有没有变化，它的值也会跟着更新为当前UPDATE操作时的时间。<br>！无论是否操作字段，都进行更新<br>N: SpringMvc 文件上传<br>1.需要引入两个Jar包</p>
+<pre><code>&lt;dependency&gt;
+      &lt;groupId&gt;commons-io&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+      &lt;version&gt;2.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+      &lt;version&gt;1.3&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre><p>2.需要在spring-mvc中添加</p>
+<pre><code>
+    &lt;bean id=&quot;multipartResolver&quot;
+          class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;
+
+        &lt;!-- one of the properties available; the maximum file size in bytes  --&gt;
+        &lt;!-- 10mb --&gt;
+        &lt;property name=&quot;maxUploadSize&quot; value=&quot;1000000&quot;/&gt;
+        &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot;/&gt;
+    &lt;/bean&gt;
+</code></pre><p>注意的是必须添加utf-8否则会导致上传中文乱码。</p>
+<p>N:Mybatis 映射时如果select的只有entity的几个属性，那么必须添加构造函数，单数构造函数必须要使用包装类。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Java后台 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Timestamp 有两个默认值 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ Java后台学习记录，SSM架构最终配置，Spring回滚机制。]]></title>
+      <url>/2017/05/06/Java%E5%90%8E%E5%8F%B0%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8CSSM%E6%9E%B6%E6%9E%84%E6%9C%80%E7%BB%88%E9%85%8D%E7%BD%AE%EF%BC%8CSpring%E5%9B%9E%E6%BB%9A%E6%9C%BA%E5%88%B6%E3%80%82/</url>
+      <content type="html"><![CDATA[<p>N:<br>1.之前Spring 托管 Mybatis时将配置写在同一个xml中，现在分成三部分dao service spring-mvc<br>spring-dao中 主要配置连接池、mybatis sqlSessionFactory、dao 包的位置：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans ...&gt;
+
+    &lt;!-- 引入配置文件 --&gt;
+    &lt;bean id=&quot;propertyConfigurer&quot;
+          class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;
+        &lt;property name=&quot;location&quot; value=&quot;classpath:jdbc.properties&quot; /&gt;
+    &lt;/bean&gt;
+
+    &lt;!--数据库连接池--&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;
+          destroy-method=&quot;close&quot;&gt;
+          ...
+    &lt;/bean&gt;
+
+    &lt;!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 --&gt;
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+        &lt;!--配置mybatis全局配置文件:mybatis-config.xml--&gt;
+        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
+        &lt;!--扫描entity包,使用别名,多个用;隔开--&gt;
+        &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;org.seckill.entity&quot;/&gt;
+        &lt;!--扫描sql配置文件:mapper需要的xml文件--&gt;
+        &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- DAO接口所在包名，Spring会自动查找其下的类 --&gt;
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;org.seckill.dao&quot; /&gt;
+        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre><p>spring-service中配置service，component-scan扫描service包的位置，配置事务：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans ...&gt;
+
+    &lt;context:component-scan base-package=&quot;org.seckill.service&quot;/&gt;
+
+    &lt;!-- (事务管理)transaction manager, use JtaTransactionManager for global tx --&gt;
+    &lt;bean id=&quot;transactionManager&quot;
+          class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;!--注入数据库的连接池--&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+    &lt;/bean&gt;
+    &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+
+&lt;/beans&gt;
+</code></pre><p>spring-mvc中则是配置controller以及相关设置：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans ...&gt;
+    &lt;!--1.开启SpringMvc的注解模式
+    2.提供一系列的支持，支持日期format xml json的默认支持--&gt;
+    &lt;mvc:annotation-driven/&gt;
+
+    &lt;!--静态资源配置
+    1.加入静态资源的处理
+    2.允许使用／做整体映射--&gt;
+    &lt;mvc:default-servlet-handler /&gt;
+
+    &lt;context:component-scan base-package=&quot;org.seckill.controller&quot;/&gt;
+    &lt;!-- 定义跳转的文件的前后缀 ，视图模式配置--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 --&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre><p>web.xml中之前是单独写一个content scan,servlet中单独配置 spring-mvc<br>现在则改为所有的 spring-*.xml都放在servlet中：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app ...&gt;
+  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
+
+  &lt;!-- Spring MVC servlet --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+      &lt;param-value&gt;classpath:spring/spring-*.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;async-supported&gt;true&lt;/async-supported&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+    &lt;!-- 此处可以可以配置成*.do，对应struts的后缀习惯 --&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  &lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;/index.jsp&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+&lt;/web-app&gt;
+</code></pre><p>2.log4f使用：Logger logger = LoggerFactory.getLogger(this.getClass());<br>同时必须有配置文件，默认在resources中，logback.xml或者 logback-test.xml <a href="https://logback.qos.ch/manual/configuration.html" target="_blank" rel="external">配置官方说明</a></p>
+<p>N：异常回滚问题<br>在spring-service中</p>
+<pre><code>    &lt;bean id=&quot;transactionManager&quot;
+          class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;!--注入数据库的连接池--&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+    &lt;/bean&gt;
+    &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+</code></pre><p>开启注释事务机制，在service的实现类中需要回滚的方法上添加@Transactional</p>
+<p>需要注意的是spring只有捕捉到runtime异常才能回滚这就有两个问题：</p>
+<p>（1）要使用回滚机制，第一种方式不能添加try-catch，直接throw抛出，第二种方式是在try-catch中再次将异常抛出：</p>
+<pre><code>throw new SeckillException(&quot;seckill data(md5) rewrite &quot;);
+
+ 或者
+
+catch (RepeatKillException e2) {
+            throw e2;
+    }
+</code></pre><p>（2）第二个问题就是非runtime问题，如数据库断开连接，这些异常必须转化为runtime异常：</p>
+<pre><code>catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            /**所有编译期异常（insert超时，数据库连接错误）转化为运行期异常
+             * 有错误就回滚*/
+            throw new SeckillException(&quot;seckill inner error&quot;, e);
+        }
+</code></pre><p>N：1.AJAX app等需要json，添加一个dto层，存放Json映射对象<br>2.controller中调用service，进行异常处理。因为出现异常后，程序直接停止运行，因此需要try-catch同时云云这些异常</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Java后台 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> SSM架构最终配置 Spring回滚机制 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ Java后台学习记录，Mysql 多个timestamp，xml中使用小于号，Mybatisdao接口多个参数函数错误]]></title>
+      <url>/2017/05/05/Java%E5%90%8E%E5%8F%B0%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8CMysql-%E5%A4%9A%E4%B8%AAtimestamp%EF%BC%8Cxml%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%B0%8F%E4%BA%8E%E5%8F%B7%EF%BC%8CMybatisdao%E6%8E%A5%E5%8F%A3%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0%E9%94%99%E8%AF%AF/</url>
+      <content type="html"><![CDATA[<p>N:<br>1.Mysql创建表时如果字段的引号应使用`而不是’。</p>
+<p>2.Mysql创建表时如果字段中有多个timestamp那么必须在创建之前运行set explicit_defaults_for_timestamp = 1</p>
+<p>3.注释格式为comment ‘注释’</p>
+<p>4.mysql保证事物的完整性，要在创建表之后注明引擎为Innodb ()ENGINE=Innodb</p>
+<p>5.AUTO_INCREMENT自增属性在（）后可指明从何处开始自增（）AUTO_INCREMENT = 1000</p>
+<p>6.设置默认的字符集时CHARSET = UTF8  注意utf中间没有-</p>
+<p>7.查看创建表时的语句：show create table tablename\G</p>
+<p>8.默认值 DEFAULT -1 之后没有引号</p>
+<p>N:<br>1.mybatis 与Spring整合的过程中，编写一个mybatis-config文件，储存全局配置，在spring-mybaris中在sqlSessionFactory 中configLocation中设置</p>
+<p>2.sqlSessionFactory typeAliasesPackage中配置entity的位置</p>
+<p>3.sqlSessionFactory mapperLocations配置mapper/*.xml即可扫描多个mapper</p>
+<p>4.MapperScannerConfigurer 中 basePackage配置dao位置</p>
+<p>5.mapper中sql语句中不能有&lt; 使用&lt;![CDATA[&lt;=]]&gt;替换</p>
+<p>6.java没有保存行参的记录，java在运行的时候会把List<seckill> queryAll(int offset,int limit);中的参数变成这样:queryAll(int arg0,int arg1),这样我们就没有办法去传递多个参数</seckill></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Java后台 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> timestamp xml小于号 Mybatisdao多参数 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java算法之--二进制1的个数问题--位运算]]></title>
+      <url>/2017/05/05/Java%E7%AE%97%E6%B3%95%E4%B9%8B-%E4%BA%8C%E8%BF%9B%E5%88%B61%E7%9A%84%E4%B8%AA%E6%95%B0%E9%97%AE%E9%A2%98-%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
+      <content type="html"><![CDATA[<p>大家好我是M1ko，今天给大家分享的算法是关于二进制运算的问题，说到二进制，一个程序员第一个反应肯定是位运算，这一方面也一直是自己的薄弱点，好的废话不多说开车出发。<br>首先上题目地址：<a href="http://exercise.acmcoder.com/online/online_judge_ques?ques_id=1667&amp;konwledgeId=134" target="_blank" rel="external">赛码网</a><br>上题目：<br><img src="http://img.blog.csdn.net/20160917121835073" alt="这里写图片描述"><br>依旧是高清无码的无厘头题目。这种题目一上来很容易上头，开始钻牛角尖想各种for循环。其实我们要记住一句话：超过双重循环的算法都不是好算法。<br>这时候我们要转变思路，用n个一来求得十进制必然是十分麻烦的因为总的位数是不确定的，我们是否可以算出十进制中的1的个数呢？当求得的1的个数等于输入的个数那么计数器加一问题便迎刃而解。<br>答案是肯定的，那么算法应该是怎么样的呢？这时候我们肯定要想到位运算符。&gt;&gt; , &lt;&lt; , &gt;&gt;&gt;<br>我们要计算1的个数必然还要使用一个运算符&amp;，当同一位上的两个数是1的时候，结果是1。但我们不知道究竟有多少位数呀？这是候就要用到位运算符了。<br>这里给大家分享两种思路：<br>1.直接算法：</p>
+<pre><code>static int BitCount( int n)
+    {
+        int c =0 ; // 计数器
+        while (n &gt;0)
+        {
+            if((n &amp;1) ==1) // 当前位是1
+                ++c ; // 计数器加1
+            n &gt;&gt;=1 ; // 移位
+        }
+        return c ;
+    }
+</code></pre><p>举个例子大家就会明白该算法的原理，110101当他与1进行&amp;运算时，可以想象为110101 与 000001进行运算。当最末位为1的时候结果就是1，这时候我们进行右移。最终移动完之后为0跳出循环。<br>但是大家想一想，Java中的Int有多少位？4字节32位对不对，也就是说我们for循环要进行32次才能结束。是不是不够优雅呢？</p>
+<p>2.快速算法：</p>
+<pre><code>static int BitCount2(int n){
+        int count = 0;
+        while(n&gt;0){
+            n = n&amp;(n-1);
+            count ++;
+        }
+        return count;
+    }
+</code></pre><p>看样子跟上一个算法很相似，但是n&amp;(n-1)是什么鬼？<br>同样给大家举几个例子，n = 3。转化为二进制是11.3-1=2 23转化为二进制是10，有没有发现呢其实十进制与二进制的一个很大的联系就是最后一位加一减一。很神奇的是他们是相通的。<br>110101&amp;110100–&gt;110100<br>110100&amp;110011–&gt;110000<br>110000&amp;101111–&gt;100000<br>.<br>想必聪明的我们都明白了，这个算法的原理其实就是每次循环去掉最末尾的1，这样我们只需要4次循环就可以解决问题了。是不是很神奇呢=-=。</p>
+<p>最终题目解法：</p>
+<pre><code>import java.util.Scanner;
+
+public class Main {
+    private static Scanner cin;
+
+    public static void main(String arg[]){
+        cin = new Scanner(System.in);
+        int l = cin.nextInt();
+        int m = cin.nextInt();
+        int r = cin.nextInt();
+        if(l&gt;m){
+            System.out.println(-1);
+            return;
+        }
+        int i;
+        int numCount = 0;
+        for(i=l;i&lt;=m;i++){
+            if(BitCount2(i)==r){
+                numCount++;
+            }
+        }
+        if(numCount==0){
+            System.out.println(-1);
+        }
+        else{
+            System.out.println(numCount);
+        }
+
+    }
+    static int BitCount( int n)
+    {
+        int c =0 ; // 计数器
+        while (n &gt;0)
+        {
+            if((n &amp;1) ==1) // 当前位是1
+                ++c ; // 计数器加1
+            n &gt;&gt;=1 ; // 移位
+        }
+        return c ;
+    }
+    static int BitCount2(int n){
+        int count = 0;
+        while(n&gt;0){
+            n = n&amp;(n-1);
+            count ++;
+        }
+        return count;
+    }
+}
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 二进制一个数 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android 通过Java代码生成创建界面。]]></title>
+      <url>/2017/05/03/Android-%E9%80%9A%E8%BF%87Java%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%88%9B%E5%BB%BA%E7%95%8C%E9%9D%A2%E3%80%82/</url>
+      <content type="html"><![CDATA[<p>大家好，我是Miko，前一段时间一直在忙实习，很久没有更新博客了，这一段时间准备复习准备期末考试（预习课本），复习（预习）的差不多了=_=+////，因此抽出点时间，对前一段时间的工作以及学习进行一定的总结。<br>废话不多说，本文将会层层深入给大家讲解如何动态的生成一个完整的界面。</p>
+<p><strong>本文内容：</strong></p>
+<ol>
+<li><strong>Java代码中动态生成View</strong></li>
+<li><strong>Java代码中动态设置View的位置，以及其他的属性</strong></li>
+<li><strong>LayoutParams详解</strong></li>
+</ol>
+<h2 id="一、Java代码中动态的生成View"><a href="#一、Java代码中动态的生成View" class="headerlink" title="一、Java代码中动态的生成View"></a>一、Java代码中动态的生成View</h2><p>我们以创建一个Button为例子。<br><strong>1、首先我们在onCreate方法中创建一个Button实例：</strong></p>
+<pre><code>Button button=new Button(this);
+</code></pre><p><strong>2、创建了Button实例下面我们就要指定它在哪个界面中显示：</strong><br>首先第一步找到我们要显示的界面：<br>首先把setContentView（）删掉（后文会讲）。<br>有两种方法：</p>
+<ul>
+<li><strong>使用LayoutInflate</strong></li>
+<li><strong>使用findViewById</strong></li>
+</ul>
+<p><em>1）LayoutInflate使用来找到一个布局文件：</em></p>
+<pre><code>      ViewGroup viewGroup = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.activity_main, null);
+</code></pre><p>返回的是布局文件的最外层的View容器，<br>贴一下布局文件中的XML代码</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+    tools:context=&quot;com.miko.zd.dynamicview.MainActivity&quot;
+    android:id=&quot;@+id/relative&quot;&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>这里LayoutInflate返回的就是最外层的RelativeLayout。RelativeLayout继承于ViewGroup因此完全没有问题。<br><em>2）通过FindViewByID返回最外层的View</em><br>第二种方法以第一种一致都是返回最外层的RelativeLayout：</p>
+<pre><code>        View viewGroup2 = findViewById(R.id.relative);
+</code></pre><p><strong>3、下一步就是要把我们的Button添加到RelativeLayout中了</strong><br>使用ViewGroup的addView方法：</p>
+<pre><code> viewGroup.addView(button);
+</code></pre><p>运行代码，你会发现界面中什么都没有，为什么呢？<br>前文中说过删除setContentView（）这个方法，setContenView可以理解为，为Activity绑定一个显示的的布局，我们只是找到了ViewGroup，并且添加了Button，但是没有绑定Activity，因此这里添加一句setContentView(viewGroup)；你可能会说，我一开始不删除这一句，不可以么？<br>findViewById可以，setContentView()一旦调用，layout就会立刻显示UI，而后的findViewById，找到RelativeLayout实际上已经加载出来了，添加Button，可以理解为显示出UI后动态的添加View；而inflate只会把Layout形成一个以view类实现成的对象，有需要时再用setContentView(view)显示出来。<br>运行结果：<br><img src="http://img.blog.csdn.net/20160627115016387" alt="这里写图片描述"><br>可以看到，相当原始的界面，下一步我们就要设置Button的位置以及相关属性了</p>
+<h2 id="二、Java代码中动态设置View的位置，以及其他的属性"><a href="#二、Java代码中动态设置View的位置，以及其他的属性" class="headerlink" title="二、Java代码中动态设置View的位置，以及其他的属性"></a>二、Java代码中动态设置View的位置，以及其他的属性</h2><p><strong>1、首先我们为我们的Button设置一个背景，以及文字：</strong></p>
+<pre><code>button.setBackgroundColor(Color.RED);
+button.setText(&quot;Hello World&quot;);
+</code></pre><p><img src="http://img.blog.csdn.net/20160627115621608" alt="这里写图片描述"><br><strong>2、我们下一步想给Button设置长宽：</strong><br>你可能会想button会有setHeight，setWidth方法，确实有，而且你可以实现设置长宽，但是如果你要设置Match_parent，Wrap_content，怎么实现呢？这时候我们就要使用LayoutParam方法了。<br>首先创建一个Layoutparams实例：</p>
+<pre><code>RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(100,100);
+</code></pre><p>不同的布局对应着不同的LayoutParams，我们这里是RelativeLayout所以当然是R.layoutParam这里的两个参数是Button的宽以及高，注意这里的100代表着100px，使用dp可以参照我之前的博客<br><a href="http://blog.csdn.net/mikogodzd/article/details/51142427" target="_blank" rel="external">dp转px</a></p>
+<p>那么上文中的MATCH 以及WRAP怎么实现呢？</p>
+<pre><code>RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+</code></pre><p>运行结果：<img src="http://img.blog.csdn.net/20160627120652812" alt="这里写图片描述"><br>为什么没有效果呢，因为定义了LayoutParam但是没有指定哪一个View因此还需要添加一句</p>
+<pre><code>        button.setLayoutParams(params);
+</code></pre><p><img src="http://img.blog.csdn.net/20160627120844004" alt="这里写图片描述"><br>没有任何问题。<br><strong>3、设置位置信息</strong><br>我们想要使Button居中显示，怎么实现呢？<br>还是使用LayoutParams，使用他的addRules方法：</p>
+<pre><code>        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+</code></pre><p><img src="http://img.blog.csdn.net/20160627121702321" alt="这里写图片描述"><br>addRules有两个方法：</p>
+<ul>
+<li>addRule(int verb)</li>
+<li>addRule(int verb, int anchor)<br>verb我们很好理解，就是各种规定位置的参数，anchor代表什么呢？<br>我们看源码注释：<br>The id of another view to use as an anchor,<pre><code>  *        or a boolean value (represented as {@link RelativeLayout#TRUE}
+  *        for true or 0 for false).  For verbs that don&#39;t refer to another sibling
+  *        (for example, ALIGN_WITH_PARENT_BOTTOM) just use -1.
+</code></pre>实际上verb参数可以分为两类，一种是不要任何相对view的，比如ALIGN_WITH_PARENT_BOTTOM这种的参数，另一种需要相对view的参数，例如above，right_of等等，需要一个view来表示位置的参数，这个时候就需要用到anchor，anchor代表的是相对view的id。<br>下面我们再创建一个Button:</li>
+</ul>
+<pre><code>ViewGroup viewGroup2 = (ViewGroup) viewGroup.findViewById(R.id.relative);
+
+        Button button = new Button(this);
+        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        button.setLayoutParams(params);
+        button.setBackgroundColor(Color.RED);
+        button.setText(&quot;Hello World&quot;);
+        button.setId(100);
+
+        Button button1=new Button(this);
+        RelativeLayout.LayoutParams params1=new RelativeLayout.LayoutParams(200,200);
+        params1.addRule(RelativeLayout.BELOW,100);
+        button1.setLayoutParams(params1);
+        button1.setBackgroundColor(Color.RED);
+        button1.setText(&quot;Hello World&quot;);
+
+        viewGroup2.addView(button);
+        viewGroup2.addView(button1);
+        setContentView(viewGroup);
+</code></pre><p>注意我们要先给第一个button一个id，因为是动态创建的所以使用setId方法，设id为100， params1.addRule(RelativeLayout.BELOW,100);核心代码，意思是将button1设置在id为100的view的下方。<br>运行结果：<br><img src="http://img.blog.csdn.net/20160627122907857" alt="这里写图片描述"></p>
+<h2 id="四、后记"><a href="#四、后记" class="headerlink" title="四、后记"></a>四、后记</h2><p>上文我为大家详细解析了View的动态创建，以及动态的添加属性，有几点需要注意的：<br>1、上文中的布局都是用的RelativeLayout，实际上你会发现只有RelativeLayout.layoutParam具有addRules方法，这其实是与XML中相对应的，你在LinearLayout中无法使用Right_of等等相对布局的属性，这些都是相通的。    实际上我认为在动态生成界面的几个布局中RelativeLayout是最简单也是最准确的。<br>2、为什么要使用动态生成界面？我想在编程中使用XML是无可厚非的，但是App的大趋势是动态化来减少版本更替，这就涉及到一个不要写死的问题，国内已经有很多尝试，即通过服务器动态生成界面。如果你有兴趣，并且深入实践过，可以加我的qq，探讨：136057505<br>3、博主大二党，如果有什么错误欢迎指正=-=。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Android 动态化开发 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android WifiDirect中文最强详解]]></title>
+      <url>/2017/05/03/Android-WifiDirect%E4%B8%AD%E6%96%87%E6%9C%80%E5%BC%BA%E8%AF%A6%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<p>大家好我是Miko，最近想研究一下WifiDirect技术，于是翻看官方文档之后，想写一个Demo，Google API Sample已经很老了，还是用的Eclipse，宝宝心好累，在CSDN上找了几篇文章，竟然都是些API的国语翻译，程序猿节操何在？这里我将会用自己根据官方Demo重写的Demo来详解WifiDirect的使用。<br>Android4.0之后开始支持WifiDirect技术，即Wifi直连，做为一种通讯方式，它的优势在于传输速度快传输距离远。<br>ok<br>首先上我的DemoGithub地址<a href="https://github.com/m1koo/WifiDirect" target="_blank" rel="external">https://github.com/m1koo/WifiDirect</a><br>在上官方文档<a href="http://developer.android.com/intl/zh-tw/guide/topics/connectivity/wifip2p.html" target="_blank" rel="external">http://developer.android.com/intl/zh-tw/guide/topics/connectivity/wifip2p.html</a><br>官方Demo <a href="http://download.csdn.net/detail/yichigo/5516627" target="_blank" rel="external">http://download.csdn.net/detail/yichigo/5516627</a></p>
+<p>通过Wi-Fi Direct查找附近的设备，并与之连接一般包括如下几个骤：<br>一 设置应用程序权限<br>二 创建一个广播接收器和对等网络管理器<br>三 初始化对等点的搜索<br>四 获取对等点列表<br>五 连接一个对等点</p>
+<p><strong>一、设置权限</strong><br>我们mainifest中添加如下权限</p>
+<pre><code> &lt;uses-sdk android:minSdkVersion=&quot;14&quot; /&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CHANGE_WIFI_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CHANGE_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre><p>注:<br>android.permission.ACCESS_WIFI_STATE       允许程序访问Wi-Fi网络状态信息(Allows applications to access information about Wi-Fi networks)<br>android.permission.CHANGE_WIFI_STATE      允许程序改变Wi-Fi连接状态(Allows applications to change Wi-Fi connectivity state)<br>android.permission.INTERNET                           当需要访问网络的时候，需要在AndroidManifest.xml里面添加访问网络的权限</p>
+<p><strong>二、创建广播接收器</strong><br>首先在MainActivity中初始化IntentFilter并让它监听以下动作:<br>WIFI_P2P_STATE_CHANGED_ACTION</p>
+<ul>
+<li>表明Wi-Fi对等网络（P2P）是否已经启用<br>WIFI_P2P_PEERS_CHANGED_ACTION</li>
+<li>表明可用的对等点的列表发生了改变<br>WIFI_P2P_CONNECTION_CHANGED_ACTION</li>
+<li>表示Wi-Fi对等网络的连接状态发生了改变<br>WIFI_P2P_THIS_DEVICE_CHANGED_ACTION</li>
+<li>表示该设备的配置信息发生了改变</li>
+</ul>
+<pre><code> private void initIntentFilter() {
+        mFilter = new IntentFilter();
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+    }
+</code></pre><p>然后我们创建一个新的广播类</p>
+<pre><code>public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
+
+    private WifiP2pManager mManager;
+    private WifiP2pManager.Channel mChannel;
+    private Activity mActivity;
+    private WifiP2pManager.PeerListListener mPeerListListener;
+    private WifiP2pManager.ConnectionInfoListener mInfoListener;
+
+    public WifiDirectBroadcastReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel, Activity activity,
+                                       WifiP2pManager.PeerListListener peerListListener,
+                                       WifiP2pManager.ConnectionInfoListener infoListener
+    ) {
+        this.mManager = manager;
+        this.mChannel = channel;
+        this.mPeerListListener = peerListListener;
+        this.mActivity = activity;
+        this.mInfoListener = infoListener;
+    }
+
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        String action = intent.getAction();
+
+        /*check if the wifi is enable*/
+        if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
+            int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
+             if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {  
+                activity.setIsWifiP2pEnabled(true);  
+            } else {  
+                activity.setIsWifiP2pEnabled(false);  
+            }  
+        }
+        /*get the list*/
+        else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+
+            mManager.requestPeers(mChannel, mPeerListListener);
+        }
+        /*查看当前是否处于查找状态
+        * get the state of discover*/
+        else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
+
+            int State = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE, -1);
+
+            if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED)
+                Toast.makeText(mActivity, &quot;搜索开启&quot;, Toast.LENGTH_SHORT).show();
+            else if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED)
+                Toast.makeText(mActivity, &quot;搜索已关闭&quot;, Toast.LENGTH_SHORT).show();
+
+        }
+        /*Respond to new connection or disconnections
+        *查看是否创建连接*/
+        else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+
+            if (mManager == null) {
+                return;
+            }
+
+            NetworkInfo networkInfo = (NetworkInfo) intent
+                    .getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+
+            if (networkInfo.isConnected()) {
+                Log.i(&quot;xyz&quot;, &quot;已连接&quot;);
+                mManager.requestConnectionInfo(mChannel, mInfoListener);
+            } else {
+                Log.i(&quot;xyz&quot;, &quot;断开连接&quot;);
+                return;
+            }
+        }
+
+        /*Respond to this device&#39;s wifi state changing*/
+        else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
+        }
+    }
+}
+</code></pre><p>构造函数中的manager以及channel比较好理解，剩下的主要是在mainActivity中的方法的实现<br>第一个action用于检测当前设备的wifi是否打开很好理解<br>第二个action当你开始搜索之后，当设备列表发生变化的时候即触发通过mManager.requestPeers(mChannel, mPeerListListener);方法可以的到列表，这些我们下文详讲<br>第三个action用于检测当前是否处于搜索状态，<br>第四个action用于检测两个设备连接状态是否改变<br>第五个action适用于设备名称发生改变这里我们不讲</p>
+<p><strong>三、创建搜索，获得列表</strong><br>ok 广播搭建好之后，我们就要初始化一个p2p了</p>
+<p>首先在MainActivity中创建一个Manager以及一个Channel</p>
+<pre><code>
+private WifiP2pManager mManager;
+private WifiP2pManager.Channel mChannel;
+mManager = (WifiP2pManager) getSystemService(WIFI_P2P_SERVICE);
+mChannel = mManager.initialize(this, Looper.myLooper(), null);
+</code></pre><p>这样我们就开启了direct服务<br>下面我们定义搜索函数</p>
+<pre><code>   private void DiscoverPeers() {
+        mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onFailure(int reason) {
+            }
+        });
+    }
+</code></pre><p>这里面的success以及failure没有任何实质的信息，只是提醒你调用这个方法是否成功，而不代表开启搜索是否成功，要监听搜索的状态，如上文所述我们要在广播中实现</p>
+<pre><code>else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
+
+            int State = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE, -1);
+
+            if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED)
+                Toast.makeText(mActivity, &quot;搜索开启&quot;, Toast.LENGTH_SHORT).show();
+            else if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED)
+                Toast.makeText(mActivity, &quot;搜索已关闭&quot;, Toast.LENGTH_SHORT).show();
+
+        }
+</code></pre><p>ok开启搜索服务之后，当找到一个设备后，设备列表就会发生改变，这个时候就会触发广播中的第二个action</p>
+<pre><code>else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+
+            mManager.requestPeers(mChannel, mPeerListListener);
+        }
+</code></pre><p>通过requestPeers(mChannel, mPeerListListener)再通过监听器中的onPeersAvailable方法就可以得到设备列表，当让我们想在主界面中显示列表，因此监听器我们在activity中实现然后通过传参的方式传入到广播之中，</p>
+<pre><code> WifiP2pManager.PeerListListener mPeerListListerner = new WifiP2pManager.PeerListListener() {
+            @Override
+            public void onPeersAvailable(WifiP2pDeviceList peersList) {
+                peers.clear();
+                peersshow.clear();
+                Collection&lt;WifiP2pDevice&gt; aList = peersList.getDeviceList();
+                peers.addAll(aList);
+
+                for (int i = 0; i &lt; aList.size(); i++) {
+                    WifiP2pDevice a = (WifiP2pDevice) peers.get(i);
+                    HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+                    map.put(&quot;name&quot;, a.deviceName);
+                    map.put(&quot;address&quot;, a.deviceAddress);
+                    peersshow.add(map);
+                }
+                mAdapter = new MyAdapter(peersshow);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager
+                        (MainActivity.this));
+                mAdapter.SetOnItemClickListener(new MyAdapter.OnItemClickListener() {
+                    @Override
+                    public void OnItemClick(View view, int position) {
+                        CreateConnect(peersshow.get(position).get(&quot;address&quot;),
+                                peersshow.get(position).get(&quot;name&quot;));
+
+                    }
+
+                    @Override
+                    public void OnItemLongClick(View view, int position) {
+
+                    }
+                });
+            }
+        };
+</code></pre><p>这是在Activity中的实现，得到List的方法有很多，我使用了RecyclerView感觉游侠笨重，一定有其他好的方法。<br>单击每一个设备我所写的Adapter就会返回出来它的MAC地址，通过地址我们就可以来连接设备了<br><strong>三、创建连接</strong></p>
+<p>创建连接我们调用manager中的connect方法，如果连接之前没有创建一个组，系统会自动创建一个组，并且随机分配谁是GroupOwner即谁是组长，这也关系到谁是客户端谁是服务器，<br>connect方法官方文档解释<br>If the current device is part of an existing p2p group or has created</p>
+<pre><code> * a p2p group with {@link #createGroup}, an invitation to join the group is sent to
+ * the peer device.
+</code></pre><p>我们写一个方法来创建Group，在两个设备中谁调用这个方法，谁就是组长这样就实现了设定谁是服务器与客户端</p>
+<pre><code> private void BeGroupOwener() {
+        mManager.createGroup(mChannel, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int reason) {
+
+            }
+        });
+    }
+</code></pre><pre><code> private void CreateConnect(String address, final String name) {
+        WifiP2pDevice device;
+        WifiP2pConfig config = new WifiP2pConfig();
+        Log.i(&quot;xyz&quot;, address);
+
+        config.deviceAddress = address;
+        /*mac地址*/
+
+        config.wps.setup = WpsInfo.PBC;
+        Log.i(&quot;address&quot;, &quot;MAC IS &quot; + address);
+        if (address.equals(&quot;9a:ff:d0:23:85:97&quot;)) {
+            config.groupOwnerIntent = 0;
+            Log.i(&quot;address&quot;, &quot;lingyige shisun&quot;);
+        }
+        if (address.equals(&quot;36:80:b3:e8:69:a6&quot;)) {
+            config.groupOwnerIntent = 15;
+            Log.i(&quot;address&quot;, &quot;lingyigeshiwo&quot;);
+
+        }
+
+        Log.i(&quot;address&quot;, &quot;lingyige youxianji&quot; + String.valueOf(config.groupOwnerIntent));
+
+        mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int reason) {
+
+
+            }
+        });
+    }
+</code></pre><p>Wifip2pconfi这个类官方解释是<br>A class representing a Wi-Fi P2p configuration for setting up a connection<br>有道翻译 一个类代表一个wi - fi P2p配置为建立一个连接<br>其实是一个类用来储存p2p设备的信息，我们把其中的Address值改为想要链接设备的Mac地址就可以得到设备的实例，</p>
+<pre><code> mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int reason) {
+
+
+            }
+        });
+</code></pre><p>调用connect方法，实现连接，如上文所述，这里的sucess,以及failure都是表示函数的成功与否，要看是否连接还要到广播之中</p>
+<pre><code> else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+
+            if (mManager == null) {
+                return;
+            }
+
+            NetworkInfo networkInfo = (NetworkInfo) intent
+                    .getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+
+            if (networkInfo.isConnected()) {
+                Log.i(&quot;xyz&quot;, &quot;已连接&quot;);
+                mManager.requestConnectionInfo(mChannel, mInfoListener);
+            } else {
+                Log.i(&quot;xyz&quot;, &quot;断开连接&quot;);
+                return;
+            }
+        }
+</code></pre><p>NetWorkInfo方法Describes the status of a network interface. 用来描述网络接口的状态<br>当网络连接时我们调用此方法mManager.requestConnectionInfo(mChannel, mInfoListener);就可让服务器端开始接受数据了，这里在下文中也会详讲。</p>
+<p><strong>四、传输数据前的准备</strong><br>上文讲到mManager.requestConnectionInfo(mChannel, mInfoListener);方法<br>第二个参数是ConnectionInfoListener类<br>Interface for callback invocation when connection info is available用来当connect成功后回掉，跟上一个得List的监听器一样，我们也在MainActivity中实现，然后通过传参到广播之中</p>
+<pre><code>        WifiP2pManager.ConnectionInfoListener mInfoListener = new WifiP2pManager.ConnectionInfoListener() {
+
+            @Override
+            public void onConnectionInfoAvailable(final WifiP2pInfo minfo) {
+
+                Log.i(&quot;xyz&quot;, &quot;InfoAvailable is on&quot;);
+                info = minfo;
+                TextView view = (TextView) findViewById(R.id.tv_main);
+                if (info.groupFormed &amp;&amp; info.isGroupOwner) {
+                    Log.i(&quot;xyz&quot;, &quot;owmer start&quot;);
+
+                    mServerTask = new FileServerAsyncTask(MainActivity.this, view);
+                    mServerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                    mDataTask = new DataServerAsyncTask(MainActivity.this, view);
+                    mDataTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                } else if (info.groupFormed) {
+                    SetButtonVisible();
+                }
+            }
+        };
+</code></pre><p>我们看一下下面这核心代码</p>
+<pre><code> if (info.groupFormed &amp;&amp; info.isGroupOwner) {
+                    Log.i(&quot;xyz&quot;, &quot;owmer start&quot;);
+
+                    mServerTask = new FileServerAsyncTask(MainActivity.this, view);
+                    mServerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                    mDataTask = new DataServerAsyncTask(MainActivity.this, view);
+                    mDataTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                }
+                else if (info.groupFormed) {
+                    SetButtonVisible();
+                }
+</code></pre><p>我们使用的传输方式是UDP模型在这个Demo中只能从客户端向服务器端发送消息<br>ok知道这个前提之后我们看<br>第一个判断：如果组已经建立，并且是组长，也就是说当前设备是服务器，我们开启两个AsyncTask分别用来接收图片以及字符串，当然看完这篇博客之后你可以传输各种类型的数据，这里仅以这两个举例<br>AsyncTask怎么写我们后面再说，<br>看第二个判断：如果组建立了，但不是组长，也就是说当前设备是客户端，这个时候我们让两个发送Button可见，也就是说一开始所有的设备界面都是一样的没有发送数据的按钮，但判断出谁是客户端之后，我们就将发送按钮展现出来。<br>上截图<br><img src="http://img.blog.csdn.net/20160323194043700" alt="客户端界面"><br><img src="http://img.blog.csdn.net/20160323194121919" alt="服务器端界面"><br>ok搜索连接都讲完了，下面就是大头传送数据了<br><strong>五、传输数据</strong><br><strong>1.客户端 发送服务的编写</strong><br>Activity中设置发送图片按钮的监听器</p>
+<pre><code> sendpicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType(&quot;image/*&quot;);
+                startActivityForResult(intent, 20);
+
+            }
+        });
+</code></pre><p>Intent intent = new Intent(Intent.ACTION_GET_CONTENT)<br>官方文档Allow the user to select a particular kind of data and return it.<br>这个Intent会打开文件管理器<br>intent.setType(“image/*”); 这个语句决定着以什么方式打开，我们设以图片方式打开，启动Activity后我们选择好图片，之后Activity关闭自动调用onActivityResult</p>
+<pre><code> @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 20) {
+            super.onActivityResult(requestCode, resultCode, data);
+            Uri uri = data.getData();
+            Intent serviceIntent = new Intent(MainActivity.this,
+                    FileTransferService.class);
+
+            serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
+            serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH,
+                    uri.toString());
+
+            serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,
+                    info.groupOwnerAddress.getHostAddress());
+            serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT,
+                    8988);
+            MainActivity.this.startService(serviceIntent);
+        }
+    }
+</code></pre><p>Uri uri = data.getData();获得图片所在位置<br>serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH,uri.toString());将位置传入Service<br>serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,info.groupOwnerAddress.getHostAddress());传入组长的IP地址，用来创建Socket端口<br>serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT,8988);传入端口port<br>ok下面我们看服务究竟怎么写</p>
+<pre><code>public class FileTransferService extends IntentService {
+
+    private static final int SOCKET_TIMEOUT = 5000;
+    public static final String ACTION_SEND_FILE = &quot;com.example.android.wifidirect.SEND_FILE&quot;;
+    public static final String EXTRAS_FILE_PATH = &quot;sf_file_url&quot;;
+    public static final String EXTRAS_GROUP_OWNER_ADDRESS = &quot;sf_go_host&quot;;
+    public static final String EXTRAS_GROUP_OWNER_PORT = &quot;sf_go_port&quot;;
+
+    public FileTransferService(String name) {
+        super(name);
+    }
+
+    public FileTransferService() {
+        super(&quot;FileTransferService&quot;);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.app.IntentService#onHandleIntent(android.content.Intent)
+     */
+    @Override
+    protected void onHandleIntent(Intent intent) {
+
+        Context context = getApplicationContext();
+        if (intent.getAction().equals(ACTION_SEND_FILE)) {
+            String fileUri = intent.getExtras().getString(EXTRAS_FILE_PATH);
+
+            String host = intent.getExtras().getString(
+                    EXTRAS_GROUP_OWNER_ADDRESS);
+
+            Socket socket = new Socket();
+
+            int port = intent.getExtras().getInt(EXTRAS_GROUP_OWNER_PORT);
+
+            try {
+                Log.d(&quot;xyz&quot;, &quot;Opening client socket - &quot;);
+                socket.bind(null);
+                socket.connect((new InetSocketAddress(host, port)),
+                        SOCKET_TIMEOUT);
+
+                Log.d(&quot;xyz&quot;,
+                        &quot;Client socket - &quot; + socket.isConnected());
+
+                /*returns an output stream to write data into this socket*/
+                OutputStream stream = socket.getOutputStream();
+                ContentResolver cr = context.getContentResolver();
+                InputStream is = null;
+                try {
+                    is = cr.openInputStream(Uri.parse(fileUri));
+                } catch (FileNotFoundException e) {
+                    Log.d(&quot;xyz&quot;, e.toString());
+                }
+                FileServerAsyncTask.copyFile(is, stream);
+                Log.d(&quot;xyz&quot;, &quot;Client: Data written&quot;);
+            } catch (IOException e) {
+                Log.e(&quot;xyz&quot;, e.getMessage());
+            } finally {
+                if (socket != null) {
+                    if (socket.isConnected()) {
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+                            // Give up
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre><p>socket.connect((new InetSocketAddress(host, port)),<br>                        SOCKET_TIMEOUT);创建Socket连接</p>
+<pre><code>    /*returns an output stream to write data into this socket*/
+                OutputStream stream = socket.getOutputStream();
+                ContentResolver cr = context.getContentResolver();
+                InputStream is = null;
+                try {
+                    is = cr.openInputStream(Uri.parse(fileUri));
+                } catch (FileNotFoundException e) {
+                    Log.d(&quot;xyz&quot;, e.toString());
+                }
+                FileServerAsyncTask.copyFile(is, stream);
+</code></pre><p>将is copy到stream中ok这样我们的服务就启动成功了，至于怎么接收先不细讲，先看一下AsyncTask<br><strong>2、服务器端 AsyncTask的编写</strong></p>
+<pre><code>public class FileServerAsyncTask extends
+        AsyncTask&lt;Void, Void, String&gt; {
+
+    private Context context;
+    private TextView statusText;
+
+    /**
+     * @param context
+     * @param statusText
+     */
+    public FileServerAsyncTask(Context context, View statusText) {
+        this.context = context;
+        this.statusText = (TextView) statusText;
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
+        try {
+            Log.i(&quot;xyz&quot;, &quot;file doinback&quot;);
+            ServerSocket serverSocket = new ServerSocket(8988);
+            Socket client = serverSocket.accept();
+            final File f = new File(
+                    Environment.getExternalStorageDirectory() + &quot;/&quot;
+                            + &quot;com.miko.zd&quot; + &quot;/wifip2pshared-&quot;
+                            + System.currentTimeMillis() + &quot;.jpg&quot;);
+
+            File dirs = new File(f.getParent());
+
+            if (!dirs.exists())
+                dirs.mkdirs();
+            f.createNewFile();
+
+
+                /*Returns an input stream to read data from this socket*/
+            InputStream inputstream = client.getInputStream();
+            copyFile(inputstream, new FileOutputStream(f));
+            serverSocket.close();
+            return f.getAbsolutePath();
+
+        } catch (IOException e) {
+            Log.e(&quot;xyz&quot;, e.toString());
+            return null;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+     */
+    @Override
+    protected void onPostExecute(String result) {
+
+        Log.i(&quot;xyz&quot;, &quot;file onpost&quot;);
+        Toast.makeText(context, &quot;result&quot;+result, Toast.LENGTH_SHORT).show();
+
+        if (result != null) {
+            statusText.setText(&quot;File copied - &quot; + result);
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse(&quot;file://&quot; + result), &quot;image/*&quot;);
+            context.startActivity(intent);
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.os.AsyncTask#onPreExecute()
+     */
+    @Override
+    protected void onPreExecute() {
+
+    }
+
+
+    public static boolean copyFile(InputStream inputStream, OutputStream out) {
+        byte buf[] = new byte[1024];
+        int len;
+        try {
+            while ((len = inputStream.read(buf)) != -1) {
+                out.write(buf, 0, len);
+
+            }
+            out.close();
+            inputStream.close();
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
+    }
+}
+</code></pre><p>AsyncTask原理大家应该很清楚这里不细说，不懂Google=_=+///<br>ok先看doInbackGround<br> ServerSocket serverSocket = new ServerSocket(8988);创建Socket<br> Socket client = serverSocket.accept();这句很关键，<br> accept方法<br> Waits for an incoming request and blocks until the connection is opened.<br> This method returns a socket object representing the just opened connection.<br> 也就说等待连接之前这里是阻塞的，线程停止，当然不会调用下面的onPostExecute，<br> 这一点很关键我们梳理一下，找到设备，点击设备进行连接后ConnectionInfoListener监听器触发，调用方法</p>
+<pre><code>onConnectionInfoAvailable{
+ if (info.groupFormed &amp;&amp; info.isGroupOwner) {
+                    Log.i(&quot;xyz&quot;, &quot;owmer start&quot;);
+
+                    mServerTask = new FileServerAsyncTask(MainActivity.this, view);
+                    mServerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    }
+                    }
+</code></pre><p>这个时候Task就启动了，当然它会在 Socket client = serverSocket.accept()这里阻塞</p>
+<p>这个时候，我们点击发送数据按钮启动服务，socket.connect((new InetSocketAddress(host, port)),<br>                        SOCKET_TIMEOUT);<br>  这时候创建连接，阻塞取消，然后就会尽心之后的copy保存了</p>
+<p>ok博主是大二党，计算机科学与技术专业，这搞笑的专业，完全自学，每天学一点，好吧这一点有时候是10个钟头，但自己就能感觉到进步，起码打字快了吧=——=，虽然blog很耗费时间，但我坚信这是一种学习的好方法。                 </p>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> WifiDirect </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Hello Hexo]]></title>
-      <url>/2017/05/01/Hello-Hexo/</url>
+      <url>/2017/05/03/Hello-Hexo/</url>
       <content type="html"><![CDATA[<p>这是我的第一篇Hexo博客，之后的日子我会逐渐把CSDN上的文章转移到Hexo上，这几天在折腾Hexo的过程中收获不少，让我有了当年彻夜刷机的感觉.在此感谢一位简书作者的帮助，<a href="http://www.jianshu.com/p/e99ed60390a8" target="_blank" rel="external">他的博客</a>。开启美妙的Hexo吧。</p>
 ]]></content>
       
         <categories>
             
-            <category> 杂记 </category>
+            <category> Hello </category>
             
         </categories>
         
@@ -18,6 +1009,359 @@
         <tags>
             
             <tag> Hello </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android Uri获取真实路径以及文件名的方法]]></title>
+      <url>/2017/05/02/Android-Uri%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9E%E8%B7%AF%E5%BE%84%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>在Android 编程中经常会用到uri转化为文件路径<br>下面是4.4后通过Uri获取路径以及文件名一种方法</p>
+<pre><code> public static String getRealFilePath( final Context context, final Uri uri ) {
+        if ( null == uri ) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if ( scheme == null )
+            data = uri.getPath();
+        else if ( ContentResolver.SCHEME_FILE.equals( scheme ) ) {
+            data = uri.getPath();
+        } else if ( ContentResolver.SCHEME_CONTENT.equals( scheme ) ) {
+            Cursor cursor = context.getContentResolver().query( uri, new String[] { MediaStore.Images.ImageColumns.DATA }, null, null, null );
+            if ( null != cursor ) {
+                if ( cursor.moveToFirst() ) {
+                    int index = cursor.getColumnIndex( MediaStore.Images.ImageColumns.DATA );
+                    if ( index &gt; -1 ) {
+                        data = cursor.getString( index );
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+</code></pre><p>等到的路径 /storage/emulated/0/图片/浪费-林宥嘉.mp3</p>
+<p>怎么获取文件名呢？</p>
+<pre><code> String path=&quot;/storage/emulated/0/图片/浪费-林宥嘉.mp3&quot;;
+                String b = path.substring(path.lastIndexOf(&quot;/&quot;) + 1, path.length());
+</code></pre><p>通过索引最后一个/就可以在String中截取了</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Uri真实路径 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Java算法之--股神]]></title>
+      <url>/2017/05/02/Java%E7%AE%97%E6%B3%95%E4%B9%8B-%E8%82%A1%E7%A5%9E/</url>
+      <content type="html"><![CDATA[<p>博主前一段时间参加了百度的在线考试，哭的稀里糊涂的，发觉自己算法这一方面欠缺的真的不是一星半点。接下来一段时间打算每天（三天打鱼两天晒网=-=）都做几道算法题。是时候提高一下自己了。<br>给大家一个在线测试的网址：<a href="http://www.acmcoder.com/" target="_blank" rel="external">赛码网</a><br>OK，废话不多说上题目。<br><img src="http://img.blog.csdn.net/20160917010601981" alt="这题目，好的我准备好发财了=-="><br>题目很简单，简单来说是一个小赛同学经过一段时间的算法学习，走向人生巅峰，迎娶白富美的扯淡的故事。<br>这种题目咋一看很简单，但一想有很麻烦。博主一上来就开始惯性思维，for循环，一个？必然不够，两个，一个记录总数一个递增。但是很不幸运行超时，代码也不够优雅。这时候就需要画图大法了。<br><img src="http://img.blog.csdn.net/20160917011152952" alt="这里写图片描述"><br>宝宝一眼就看出（冥思苦想=-=），可以将数列分为几组，只要我们计算出下降的天数，那么最终使用总天数-2*下降天数即可。OK思路定下来了，那么怎么计算下降的天数呢？<br>两种方法：</p>
+<ol>
+<li>for循环</li>
+<li><p>开方解一元二次方程</p>
+<p>下面就是撸代码了：</p>
+</li>
+</ol>
+<p>1.for循环方法</p>
+<pre><code>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while(in.hasNext()){
+            Integer n = in.nextInt();
+            for(int i = 1;;i++){
+                int sum = 2*i+i*(i-1)/2;
+                if(sum&gt;n||sum==n){
+                    System.out.println(n-(i-1)*2);
+                    break;
+                }
+            }
+        }
+    }
+}
+</code></pre><p>2.开方</p>
+<pre><code>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+        int n = sc.nextInt();
+        int day = (int) (-1.5+Math.sqrt(9+8*(n-1))/2);
+        System.out.println(n-day*2);
+    }
+    }
+}
+</code></pre><p>两种方法其实就是正反两种思路解一元二次方程。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 算法 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 股神算法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ Android校园网登录客户端]]></title>
+      <url>/2017/05/02/Android%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%99%BB%E5%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+      <content type="html"><![CDATA[<p>大家好，我是M1ko。在互联网时代的今天，如果一个App不接入互联网，那么这个App一定不会有长时间的生命周期，因此Android网络编程是每一个Android开发者必备的技能，博主是在校大学生，自学Android一年半多，正好通过一个模拟登录校园网软件，来给大家演示如何在网页上抓取我们想要的数据，以及将数据Post给服务器。如果有什么错误或改进欢迎大家指正=-= ，如果想交流博主qq 136057505</p>
+<p>好的废话不多说看一下我们的重点</p>
+<ul>
+<li><strong>Httpwatch等软件抓取Post请求</strong></li>
+<li><strong>如何获取验证码</strong></li>
+<li><p><strong>使用Jsoup解析数据</strong></p>
+<p>Ok首先上项目Github网址：<a href="https://github.com/m1koo/LoginNwuWeb1.git" target="_blank" rel="external">https://github.com/m1koo/LoginNwuWeb1.git</a><br>下面是软件的截图大家心里能有项目的大体框架<br><img src="http://img.blog.csdn.net/20160412153707748" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160412153650757" alt="这里写图片描述"></p>
+</li>
+</ul>
+<h2 id="一、Http基础"><a href="#一、Http基础" class="headerlink" title="一、Http基础"></a>一、Http基础</h2><p>有Http基础的朋友都知道，我们是通过Get 与Post请求与服务器进行交互的，Get顾名思义就是获取信息，Post就是想服务器发请求，但是Post也可以用来获取信息并且比Get有很多优势，我们这里就是使用的Post。Java中有很多方式与服务器进行连接，常见的有HttpUrlCollection，HttpClient。两者的优缺点：</p>
+<p> <strong>HttpUrlCollection优点：</strong></p>
+<ul>
+<li>轻量，拓展性强</li>
+<li>节省资源<br><strong>缺点：</strong></li>
+<li><p>代码量大复杂</p>
+<p><strong>HttpClient优点：</strong></p>
+</li>
+<li>便捷，代码简单<br><strong>缺点：</strong><br>-拓展性不足，耗费资源多</li>
+</ul>
+<p>实际上在Android6.0中Google已经删除了HttpClient的API官方理由是耗电量大，但是HttpCollection的代码量实在是大，因此我们还是使用了HttpClient，只需在build.gradle中添加以下语句<br><code>android {
+    useLibrary &#39;org.apache.http.legacy&#39;
+}</code>即可。</p>
+<h2 id="二、服务器地址的获取"><a href="#二、服务器地址的获取" class="headerlink" title="二、服务器地址的获取"></a>二、服务器地址的获取</h2><p>我们要向服务器Post数据要知道Post的地址是谁，这就要用我们的抓包软件了，博主使用的是HttpWatch与火狐的FireBug，两个软件的功能相互补充，两个软件基本的使用方法大家自行Google(百度，嘿嘿嘿=-=)<br><strong>1.验证码的地址</strong><br>ok首先打开我们的校园网登录网页：<br><a href="http://jwxt.nwu.edu.cn/%28dlxrmg55j21wlaqv2z5rcdyi%29/Default2.aspx" target="_blank" rel="external">http://jwxt.nwu.edu.cn/%28dlxrmg55j21wlaqv2z5rcdyi%29/Default2.aspx</a><br>我们点击IE 中HttpWatch Record按钮，然后刷新这个网站我们可以看到如下的界面<br><img src="http://img.blog.csdn.net/20160412164631122" alt="很多的Get请求"><br>我们能够看到很多Get请求这些Get请求就能够获取打开的界面的各个元素，右键G右方的网址，选择Open in the new Tab就可以看到各个元素，细心（累死=-=）的查找之后我们发现验证码的网址是<br><a href="http://jwxt.nwu.edu.cn/%28dlxrmg55j21wlaqv2z5rcdyi%29/CheckCode.aspx" target="_blank" rel="external">http://jwxt.nwu.edu.cn/%28dlxrmg55j21wlaqv2z5rcdyi%29/CheckCode.aspx</a> 打开后如下图显示<br><img src="http://img.blog.csdn.net/20160412165606584" alt="验证码的图片"></p>
+<p><strong>2.登陆post地址</strong><br>获得验证码的地址之后，我们还要获得登陆服务器的地址，还是使用HttpWatch，我们输入进去账号密码以及验证码之后，单击登录开始抓取<img src="http://img.blog.csdn.net/20160412171947508" alt="如下图所示"><br>打开下面的POST DATA就可以看到我们发送的数据以及他们的类别<br>__VIEWSTATE<br>Button1<br>hidPdrs<br>hidsc<br>lbLanguag<br>RadioButtonLi<br>TextBox2 密码<br>txtSecretCode 验证码<br>txtUserName 用户名 <strong>这里不给用户名，有需要的QQ 加我136057505=-=</strong><br>这些值很关键，我们在这里面可以找到对应的值，如果没有值那就是空，好的这些我们下面会详细讲，我们还没有获得Post地址，右键Post这一行Copy即可，ok这样我们发送Post请求的地址就到手了。<br><a href="http://jwxt.nwu.edu.cn/%28dlxrmg55j21wlaqv2z5rcdyi%29/Default2.aspx" target="_blank" rel="external">http://jwxt.nwu.edu.cn/%28dlxrmg55j21wlaqv2z5rcdyi%29/Default2.aspx</a></p>
+<h2 id="三、登陆"><a href="#三、登陆" class="headerlink" title="三、登陆"></a>三、登陆</h2><p><strong>1.验证码图片的获取</strong><br>我们有了各种地址，下面就要登陆了，但是我们知道了账号和密码（嘿嘿嘿，就不告诉你们=-=），我们还要知道验证码，怎么获得图片呢？上文中我们已经知道了验证码的地址了，我们可以Get请求，但之前也说过一般使用Post请求来进行，于是我们上代码</p>
+<pre><code>  HttpPost httPost = new HttpPost(VERIFATIONURL);
+                HttpClient client = new DefaultHttpClient();
+                try {
+                    HttpResponse httpResponse = client.execute(httPost);
+                    byte[] bytes = new byte[1024];
+                    bytes = EntityUtils.toByteArray(httpResponse.getEntity());
+                    bmVerifation = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+</code></pre><p>HttpClient的详细用法大家自行Google这里不详细展开<br>VERIFATIONURL就是上文中的验证码地址，首先创建post请求，再创建一个Httpclient ,然后是HttpResponse即响应，我们获取的服务器的返回值就在通过他获取，我们创建一个byte数组，首先将响应中获得的数据转化为byte数组，然后通过 BitmapFactory.decodeByteArray(bytes, 0, bytes.length);方法将byte数组编译为bitmap，这时候我们就获得了验证码的Bitmap了，我们能直接ImageView.SetBitmap么？当然不能，首先第一点我们在网页上获取图片是一个耗时操作，所以我们不能在主线程中进行，第二点只有在主线程中才能更新UI因此，我们使用Thread+Handler解决方法，上代码：</p>
+<pre><code>private void DoGetVerifation() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpPost httPost = new HttpPost(VERIFATIONURL);
+                HttpClient client = new DefaultHttpClient();
+                try {
+                    HttpResponse httpResponse = client.execute(httPost);
+                    byte[] bytes = new byte[1024];
+                    bytes = EntityUtils.toByteArray(httpResponse.getEntity());
+                    bmVerifation = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Message msg = new Message();
+                msg.arg1 = 10;
+                handler.sendMessage(msg);
+            }
+        }).start();
+    }
+</code></pre><p>主线程中接收到msg之后ivVerifation.setImageBitmap(bmVerifation);这样我们就得到了验证码的图片并且在主界面上显示出来了</p>
+<p><strong>2.发送Post请求登录</strong></p>
+<p>我们目前知道了用户名，密码，验证码，下一步就是要登录了，登陆同样是个耗时操作，当然也要开启一个新的线程，这没什么好说的了，我们同样是发送Post请求，上代码：</p>
+<pre><code>private void DoLogin(final String user, final String password, final String verifation) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DefaultHttpClient defaultclient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost(LOGINURL);
+                HttpResponse httpResponse;
+
+                //设置post参数
+                List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+                params.add(new BasicNameValuePair(&quot;__VIEWSTATE&quot;, &quot;dDwyODE2NTM0OTg7Oz6ZmvWn7xzjizifHN9MgLoDNTRtjQ==&quot;));
+                params.add(new BasicNameValuePair(&quot;Button1&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;hidPdrs&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;hidsc&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;lbLanguage&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;RadioButtonList1&quot;, &quot;%D1%A7%C9%FA&quot;));
+                params.add(new BasicNameValuePair(&quot;TextBox2&quot;, password));
+                params.add(new BasicNameValuePair(&quot;txtSecretCode&quot;, verifation));
+                params.add(new BasicNameValuePair(&quot;txtUserName&quot;, user));
+
+                //获得个人主界面的HTML
+                try {
+                    httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                    httpResponse = defaultclient.execute(httpPost);
+                    Log.i(&quot;xyz&quot;, String.valueOf(httpResponse.getStatusLine().getStatusCode()));
+
+                    if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                        StringBuffer sb = new StringBuffer();
+                        HttpEntity entity = httpResponse.getEntity();
+                        MAINBODYHTML = EntityUtils.toString(entity);
+                        IsLoginSuccessful(MAINBODYHTML);
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+</code></pre><p>首先是创建post,client response,与前面无异，我们获取数据的Post请求，比如说获取验证码请求是不需要参数的，但是我们登录需要发送给服务器 用户名 密码 验证码，于是我们为Post请求设置参数</p>
+<pre><code> //设置post参数
+                List&lt;NameValuePair&gt; params = new ArrayList&lt;NameValuePair&gt;();
+                params.add(new BasicNameValuePair(&quot;__VIEWSTATE&quot;, &quot;dDwyODE2NTM0OTg7Oz6ZmvWn7xzjizifHN9MgLoDNTRtjQ==&quot;));
+                params.add(new BasicNameValuePair(&quot;Button1&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;hidPdrs&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;hidsc&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;lbLanguage&quot;, &quot;&quot;));
+                params.add(new BasicNameValuePair(&quot;RadioButtonList1&quot;, &quot;%D1%A7%C9%FA&quot;));
+                params.add(new BasicNameValuePair(&quot;TextBox2&quot;, password));
+                params.add(new BasicNameValuePair(&quot;txtSecretCode&quot;, verifation));
+                params.add(new BasicNameValuePair(&quot;txtUserName&quot;, user));
+                    //获得个人主界面的HTML
+                try {
+                    httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                    httpResponse = defaultclient.execute(httpPost);
+                    Log.i(&quot;xyz&quot;, String.valueOf(httpResponse.getStatusLine().getStatusCode()));
+
+                    if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                        StringBuffer sb = new StringBuffer();
+                        HttpEntity entity = httpResponse.getEntity();
+                        MAINBODYHTML = EntityUtils.toString(entity);
+                        IsLoginSuccessful(MAINBODYHTML);
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+</code></pre><p>这些参数就是我们之前使用HttpWatch获取的Post data  只有类型没有值的参数我们设置为“”空，使用httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));方法将我们设置的param 参数集合给httppost,下面和之前一样，也是通过Response获取响应值，只不过这里返回的不是图片而是赤果果的String=-=，IsLoginSuccessful这个函数是用来判断我们是否登录成功，这就要用到我们下面要说的数据解析了。</p>
+<h2 id="四、数据解析"><a href="#四、数据解析" class="headerlink" title="四、数据解析"></a>四、数据解析</h2><p><strong>1.返回的响应？</strong><br>我们登陆后会得到服务器给我们的响应，我们在火狐的Firebug（HttpWatch也可以个人感觉看响应值Firebug比较方便）上机型一次成功的登陆，看一下他究竟会给我们返回什么<br>如图我们可以知道实际上响应值就是我们的网页的HTML，如果登陆成功实际上就是返回个人首页<br><img src="http://img.blog.csdn.net/20160412183423232" alt="这里写图片描述"><br>那么如果失败呢？我们模拟一次验证码错误如下图，可见同样返回一个HTML<br><img src="http://img.blog.csdn.net/20160412183828643" alt="这里写图片描述"><br>我们注意这一行</p>
+<pre><code>&lt;script language=&#39;javascript&#39; defer&gt;alert(&#39;验证码不正确！！&#39;);document.getElementById(&#39;TextBox2&#39;).focus();
+&lt;/script&gt;
+</code></pre><p>这实际上是弹出一个窗口，提示我们验证码错误，下面我们就会利用里面不同的提示来判断我们登陆的状态</p>
+<p><strong>2.使用Jsoup进行数据解析</strong><br>我们创建之前提过的IsLoginSuccessful函数</p>
+<pre><code>   private void IsLoginSuccessful(String loginresult) {
+        Document doc = Jsoup.parse(loginresult);
+        Elements alert = doc.select(&quot;script[language]&quot;);
+        Elements success = doc.select(&quot;a[href]&quot;);
+
+        Message msg = new Message();
+        //先判断是否登录成功，若成功直接退出
+        for (Element link : success) {
+            //获取所要查询的URL,这里对应地址按钮的名字叫成绩查询
+            if (link.text().equals(&quot;等级考试查询&quot;)) {
+                Log.i(&quot;xyz&quot;, &quot;登录成功&quot;);
+                msg.arg1 = 6;
+                handler.sendMessage(msg);
+                return;
+            }
+        }
+
+        for (Element link : alert) {
+            //刷新验证码
+            DoGetVerifation();
+            //获取错误信息
+            if (link.data().contains(&quot;验证码不正确&quot;)) {
+                Log.i(&quot;xyz&quot;, &quot;验证码错误&quot;);
+                msg.arg1 = 0;
+                handler.sendMessage(msg);
+            } else if (link.data().contains(&quot;用户名不能为空&quot;)) {
+                Log.i(&quot;xyz&quot;, &quot;用户名不能为空&quot;);
+                msg.arg1 = 1;
+                handler.sendMessage(msg);
+            } else if (link.data().contains(&quot;密码错误&quot;)) {
+                Log.i(&quot;xyz&quot;, &quot;密码或用户名错误&quot;);
+                msg.arg1 = 2;
+                handler.sendMessage(msg);
+            } else if (link.data().contains(&quot;密码不能为空&quot;)) {
+                Log.i(&quot;xyz&quot;, &quot;密码不能为空&quot;);
+                msg.arg1 = 3;
+                handler.sendMessage(msg);
+           ......
+        }
+    }
+</code></pre><p>我使用的是一个开源的库Jsoup进行解析当然还有很多方法，大家自行Google(百度=-=咋老躺枪)<br><a href="http://www.open-open.com/jsoup/" target="_blank" rel="external">http://www.open-open.com/jsoup/</a>    Jsoup的中文API指南大家可以看一下<br>首先我们判断登陆成功，我们在登陆成功的HTML中找到了如下语句</p>
+<pre><code>&lt;a href=&quot;xsdjkscx.aspx?xh=2014117170&amp;xm=邹德宏&amp;gnmkdm=N121606&quot; target=&#39;zhuti&#39; onclick=&quot;GetMc(&#39;等级考试查询&#39;);&quot;&gt;
+等级考试查询&lt;/a&gt;
+</code></pre><p>我们通过  Elements success = doc.select(“a[href]”);获取到a href”开头的数据 然后我们循环判断是否存在等级考试查询这一项，如果存在，那肯定返回的响应就是我们的个人首页了，也就是说登陆成功，我们使用Thread+Handler在主线程中Toast提醒用户<br>然后我们通过  Elements alert = doc.select(“script[language]”);获取到script 开头的语句，同样循环判断，这里要注意的是，与a href不同的是，我们要用的是link.data(),前面用的是link.text();<br>JsoupAPI 这样写的</p>
+<ul>
+<li>text()获取文本内容text(String value) 设置文本内容</li>
+<li>data()获取数据内容（例如：script和style标签)<br>ok我们通过不同的模拟操作抓取各种错误，这里不详写</li>
+</ul>
+<h2 id="五、获取个人信息"><a href="#五、获取个人信息" class="headerlink" title="五、获取个人信息"></a>五、获取个人信息</h2><p>我们登录到了个人首页，我们想进一步获取自己的信息比如说四六级成绩，怎么办呢？同样还是抓取请求<br><img src="http://img.blog.csdn.net/20160412190601618" alt="这里写图片描述"><br>跟获取验证码网址的方法一样，我们得到了成绩表的网址<br><a href="http://jwxt.nwu.edu.cn/(dlxrmg55j21wlaqv2z5rcdyi)/xsdjkscx.aspx?xh=2014117170&amp;xm=邹德宏&amp;gnmkdm=N121606" target="_blank" rel="external">http://jwxt.nwu.edu.cn/(dlxrmg55j21wlaqv2z5rcdyi)/xsdjkscx.aspx?xh=2014117170&amp;xm=邹德宏&amp;gnmkdm=N121606</a><br>前面<a href="http://jwxt.nwu.edu.cn/(dlxrmg55j21wlaqv2z5rcdyi)/是我们访问的host是不变的，我们要做的就是获取xsdjkscx.aspx?xh=2014117170&amp;xm=邹德宏&amp;gnmkdm=N121606，这个问题困扰了很长时间，后来猛然发现这万至竟然在前面说的deng&#39;lu&#39;cheng&#39;登陆成功后返回的HTML中，所以还是使用Jsoup进行分析" target="_blank" rel="external">http://jwxt.nwu.edu.cn/(dlxrmg55j21wlaqv2z5rcdyi)/是我们访问的host是不变的，我们要做的就是获取xsdjkscx.aspx?xh=2014117170&amp;xm=邹德宏&amp;gnmkdm=N121606，这个问题困扰了很长时间，后来猛然发现这万至竟然在前面说的deng&#39;lu&#39;cheng&#39;登陆成功后返回的HTML中，所以还是使用Jsoup进行分析</a></p>
+<pre><code> Document doc = Jsoup.parse(MAINBODYHTML);
+        Elements links = doc.select(&quot;a[href]&quot;);
+        StringBuffer sb = new StringBuffer();
+        for (Element link : links) {
+            //获取所要查询的URL,这里对应地址按钮的名字叫成绩查询
+            if (link.text().equals(&quot;等级考试查询&quot;)) {
+                sb.append(link.attr(&quot;href&quot;));
+            }
+        }
+        GETSCOREURL = sb.toString();
+</code></pre><p>GETSCOREURL就是我们要的后半个地址，然后我们加上前半个，进行Post请求抓取即可<br>这里返回的是一个Html的表格</p>
+<pre><code>&lt;table class=&quot;datelist&quot; cellspacing=&quot;0&quot; cellpadding=&quot;3&quot; border=&quot;0&quot; id=&quot;DataGrid1&quot; width=&quot;100%&quot;
+&gt;
+    &lt;tr class=&quot;datelisthead&quot;&gt;
+        &lt;td&gt;学年&lt;/td&gt;&lt;td&gt;学期&lt;/td&gt;&lt;td&gt;等级考试名称&lt;/td&gt;&lt;td&gt;准考证号&lt;/td&gt;&lt;td&gt;考试日期&lt;/td&gt;&lt;td&gt;成绩&lt;/td&gt;&lt;td&gt;听力成绩&lt;/td&gt;&lt;td&gt;阅读成绩&lt;/td
+&gt;&lt;td&gt;写作成绩&lt;/td&gt;&lt;td&gt;综合成绩&lt;/td&gt;
+    &lt;/tr&gt;&lt;tr&gt;
+        &lt;td&gt;2014-2015&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;CET4&lt;/td&gt;&lt;td&gt;610041151112625&lt;/td&gt;&lt;td&gt;201506&lt;/td&gt;&lt;td&gt;483&lt;/td&gt;&lt;td&gt;167
+&lt;/td&gt;&lt;td&gt;173&lt;/td&gt;&lt;td&gt;143&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;&lt;tr class=&quot;alt&quot;&gt;
+        &lt;td&gt;2015-2016&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;CET6&lt;/td&gt;&lt;td&gt;610041152209503&lt;/td&gt;&lt;td&gt;201512&lt;/td&gt;&lt;td&gt;376&lt;/td&gt;&lt;td&gt;126
+&lt;/td&gt;&lt;td&gt;143&lt;/td&gt;&lt;td&gt;107&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><p>同样使用Jsoup</p>
+<pre><code> private void parse(String parse) {
+
+        Document doc = Jsoup.parse(parse);
+        Elements trs = doc.select(&quot;table&quot;).select(&quot;tr&quot;);
+        for (int i = 0; i &lt; trs.size(); i++) {
+            Elements tds = trs.get(i).select(&quot;td&quot;);
+            for (int j = 0; j &lt; tds.size(); j++) {
+                String text = tds.get(j).text();
+                score[i][j] = text;
+                Log.i(&quot;xyz&quot;, score[i][j]);
+            }
+        }
+    }
+</code></pre><p>解析完我们就得到成绩的数组了</p>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>博主大二党自学Android开发1年半了，现在终于有入门的感觉了，这篇教程对新手来说坑能会有些难，但是一定要沉得住气，博主刚下载HttpWatch那一会都懵逼了，啥都不懂，慢慢摸索之后终于有了头绪，好了就这么些，邮箱交流的朋友加我QQ 136057505=-=</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Android 校园网登录 </tag>
             
         </tags>
         

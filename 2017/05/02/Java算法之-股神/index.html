@@ -122,17 +122,82 @@
 
 <div id="content-outer">
   <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a7.jpg)" >
+  <h2>Java算法之--股神</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-02T03:41:30.000Z">
+          2017-05-02
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>博主前一段时间参加了百度的在线考试，哭的稀里糊涂的，发觉自己算法这一方面欠缺的真的不是一星半点。接下来一段时间打算每天（三天打鱼两天晒网=-=）都做几道算法题。是时候提高一下自己了。<br>给大家一个在线测试的网址：<a href="http://www.acmcoder.com/" target="_blank" rel="external">赛码网</a><br>OK，废话不多说上题目。<br><img src="http://img.blog.csdn.net/20160917010601981" alt="这题目，好的我准备好发财了=-="><br>题目很简单，简单来说是一个小赛同学经过一段时间的算法学习，走向人生巅峰，迎娶白富美的扯淡的故事。<br>这种题目咋一看很简单，但一想有很麻烦。博主一上来就开始惯性思维，for循环，一个？必然不够，两个，一个记录总数一个递增。但是很不幸运行超时，代码也不够优雅。这时候就需要画图大法了。<br><img src="http://img.blog.csdn.net/20160917011152952" alt="这里写图片描述"><br>宝宝一眼就看出（冥思苦想=-=），可以将数列分为几组，只要我们计算出下降的天数，那么最终使用总天数-2*下降天数即可。OK思路定下来了，那么怎么计算下降的天数呢？<br>两种方法：</p>
+<ol>
+<li>for循环</li>
+<li><p>开方解一元二次方程</p>
+<p>下面就是撸代码了：</p>
+</li>
+</ol>
+<p>1.for循环方法</p>
+<pre><code>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while(in.hasNext()){
+            Integer n = in.nextInt();
+            for(int i = 1;;i++){
+                int sum = 2*i+i*(i-1)/2;
+                if(sum&gt;n||sum==n){
+                    System.out.println(n-(i-1)*2);
+                    break;
+                }
+            }
+        }
+    }
+}
+</code></pre><p>2.开方</p>
+<pre><code>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+        int n = sc.nextInt();
+        int day = (int) (-1.5+Math.sqrt(9+8*(n-1))/2);
+        System.out.println(n-day*2);
+    }
+    }
+}
+</code></pre><p>两种方法其实就是正反两种思路解一元二次方程。</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/02/Android-Uri获取真实路径以及文件名的方法/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
-<div class="tags">
-  
-    <div id="archive">
-        
-          <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-动态化开发/">Android 动态化开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-校园网登录/">Android 校园网登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello/">Hello</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua基础语法/">Lua基础语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM架构最终配置-Spring回滚机制/">SSM架构最终配置 Spring回滚机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timestamp-有两个默认值/">Timestamp 有两个默认值</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uri真实路径/">Uri真实路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WifiDirect/">WifiDirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp-xml小于号-Mybatisdao多参数/">timestamp xml小于号 Mybatisdao多参数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二进制一个数/">二进制一个数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股神算法/">股神算法</a></li></ul>
-        
-    </div>
-  
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/02/Android校园网登录客户端/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
 
   </div>
 </div>

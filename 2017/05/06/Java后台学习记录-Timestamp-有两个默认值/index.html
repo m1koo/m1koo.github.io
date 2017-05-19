@@ -122,17 +122,69 @@
 
 <div id="content-outer">
   <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a10.jpg)" >
+  <h2> Java后台学习记录 Timestamp 两个默认值</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-05T18:01:30.000Z">
+          2017-05-06
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>N: Mysql 中Timestamp 有两个默认值，current_timestamp   on update current_timestamp<br>1.current_timestamp:当要向数据库执行insert操作时，如果有个timestamp字段属性设为 CURRENT_TIMESTAMP，则无论这个字段有没有set值都插入当前系统时间<br>2.on update current_timestamp: 当执行update操作是，并且字段有ON UPDATE CURRENT_TIMESTAMP属性。则字段无论值有没有变化，它的值也会跟着更新为当前UPDATE操作时的时间。<br>！无论是否操作字段，都进行更新<br>N: SpringMvc 文件上传<br>1.需要引入两个Jar包</p>
+<pre><code>&lt;dependency&gt;
+      &lt;groupId&gt;commons-io&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+      &lt;version&gt;2.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+      &lt;version&gt;1.3&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre><p>2.需要在spring-mvc中添加</p>
+<pre><code>
+    &lt;bean id=&quot;multipartResolver&quot;
+          class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;
+
+        &lt;!-- one of the properties available; the maximum file size in bytes  --&gt;
+        &lt;!-- 10mb --&gt;
+        &lt;property name=&quot;maxUploadSize&quot; value=&quot;1000000&quot;/&gt;
+        &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot;/&gt;
+    &lt;/bean&gt;
+</code></pre><p>注意的是必须添加utf-8否则会导致上传中文乱码。</p>
+<p>N:Mybatis 映射时如果select的只有entity的几个属性，那么必须添加构造函数，单数构造函数必须要使用包装类。</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/20/Lua基础语句总结/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
-<div class="tags">
-  
-    <div id="archive">
-        
-          <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-动态化开发/">Android 动态化开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-校园网登录/">Android 校园网登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello/">Hello</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua基础语法/">Lua基础语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM架构最终配置-Spring回滚机制/">SSM架构最终配置 Spring回滚机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timestamp-有两个默认值/">Timestamp 有两个默认值</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uri真实路径/">Uri真实路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WifiDirect/">WifiDirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp-xml小于号-Mybatisdao多参数/">timestamp xml小于号 Mybatisdao多参数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二进制一个数/">二进制一个数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股神算法/">股神算法</a></li></ul>
-        
-    </div>
-  
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/06/Java后台学习记录，SSM架构最终配置，Spring回滚机制。/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
 
   </div>
 </div>

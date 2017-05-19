@@ -122,17 +122,59 @@
 
 <div id="content-outer">
   <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a8.jpg)" >
+  <h2> Java后台学习记录，Mysql 多个timestamp，xml中使用小于号，Mybatisdao接口多个参数函数错误</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-04T19:41:30.000Z">
+          2017-05-05
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>N:<br>1.Mysql创建表时如果字段的引号应使用`而不是’。</p>
+<p>2.Mysql创建表时如果字段中有多个timestamp那么必须在创建之前运行set explicit_defaults_for_timestamp = 1</p>
+<p>3.注释格式为comment ‘注释’</p>
+<p>4.mysql保证事物的完整性，要在创建表之后注明引擎为Innodb ()ENGINE=Innodb</p>
+<p>5.AUTO_INCREMENT自增属性在（）后可指明从何处开始自增（）AUTO_INCREMENT = 1000</p>
+<p>6.设置默认的字符集时CHARSET = UTF8  注意utf中间没有-</p>
+<p>7.查看创建表时的语句：show create table tablename\G</p>
+<p>8.默认值 DEFAULT -1 之后没有引号</p>
+<p>N:<br>1.mybatis 与Spring整合的过程中，编写一个mybatis-config文件，储存全局配置，在spring-mybaris中在sqlSessionFactory 中configLocation中设置</p>
+<p>2.sqlSessionFactory typeAliasesPackage中配置entity的位置</p>
+<p>3.sqlSessionFactory mapperLocations配置mapper/*.xml即可扫描多个mapper</p>
+<p>4.MapperScannerConfigurer 中 basePackage配置dao位置</p>
+<p>5.mapper中sql语句中不能有&lt; 使用&lt;![CDATA[&lt;=]]&gt;替换</p>
+<p>6.java没有保存行参的记录，java在运行的时候会把List<seckill> queryAll(int offset,int limit);中的参数变成这样:queryAll(int arg0,int arg1),这样我们就没有办法去传递多个参数</seckill></p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/06/Java后台学习记录，SSM架构最终配置，Spring回滚机制。/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
-<div class="tags">
-  
-    <div id="archive">
-        
-          <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-动态化开发/">Android 动态化开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-校园网登录/">Android 校园网登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello/">Hello</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua基础语法/">Lua基础语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM架构最终配置-Spring回滚机制/">SSM架构最终配置 Spring回滚机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timestamp-有两个默认值/">Timestamp 有两个默认值</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uri真实路径/">Uri真实路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WifiDirect/">WifiDirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp-xml小于号-Mybatisdao多参数/">timestamp xml小于号 Mybatisdao多参数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二进制一个数/">二进制一个数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股神算法/">股神算法</a></li></ul>
-        
-    </div>
-  
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/05/Java算法之-二进制1的个数问题-位运算/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
 
   </div>
 </div>

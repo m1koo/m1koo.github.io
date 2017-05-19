@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="m1ko">
+  <meta name="description" content="M1ko&#39;s Blog">
+  
+  <title>M1ko</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/Vateral.min.css">
+    
+  
+  
+    <style type="text/css">
+        html{
+            font-family: sans-serif;
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: url(/fonts/MaterialIcons-Regular.eot);
+            src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+        }
+    </style>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<body>
+<div class="progress" >
+    <div class="indeterminate"></div>
+</div>
+<a data-activates="slide-out"  class="button-collapse"><div class="nav-btn"><i class="material-icons">list</i></div></a>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/left.jpg)">
+    <div class="header-box"><img src="/images/icon.jpg" ondragstart="return false;"></div>
+    <p>Miko</p>
+    <div class="nav-link">
+        
+        
+        <a  href="https://github.com/m1koo" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:136057505@qq.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://weibo.com/u/5269244323/home?wvr=5&amp;uut=fin&amp;from=reg" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2017/05/">五月 2017<span class="archive-count">11</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<li class="nav-list dropdown-btn">
+    <a   class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">dashboard</i></div><p>分类</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="category-link" href="/categories/Android/">Android<span class="category-count">4</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/Hello/">Hello<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/Java后台/">Java后台<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/Lua/">Lua<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/算法/">算法<span class="category-count">2</span></a>
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<!--about-->
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a2.jpg)" >
+  <h2>Android WifiDirect中文最强详解</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-03T03:41:30.000Z">
+          2017-05-03
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>大家好我是Miko，最近想研究一下WifiDirect技术，于是翻看官方文档之后，想写一个Demo，Google API Sample已经很老了，还是用的Eclipse，宝宝心好累，在CSDN上找了几篇文章，竟然都是些API的国语翻译，程序猿节操何在？这里我将会用自己根据官方Demo重写的Demo来详解WifiDirect的使用。<br>Android4.0之后开始支持WifiDirect技术，即Wifi直连，做为一种通讯方式，它的优势在于传输速度快传输距离远。<br>ok<br>首先上我的DemoGithub地址<a href="https://github.com/m1koo/WifiDirect" target="_blank" rel="external">https://github.com/m1koo/WifiDirect</a><br>在上官方文档<a href="http://developer.android.com/intl/zh-tw/guide/topics/connectivity/wifip2p.html" target="_blank" rel="external">http://developer.android.com/intl/zh-tw/guide/topics/connectivity/wifip2p.html</a><br>官方Demo <a href="http://download.csdn.net/detail/yichigo/5516627" target="_blank" rel="external">http://download.csdn.net/detail/yichigo/5516627</a></p>
+<p>通过Wi-Fi Direct查找附近的设备，并与之连接一般包括如下几个骤：<br>一 设置应用程序权限<br>二 创建一个广播接收器和对等网络管理器<br>三 初始化对等点的搜索<br>四 获取对等点列表<br>五 连接一个对等点</p>
+<p><strong>一、设置权限</strong><br>我们mainifest中添加如下权限</p>
+<pre><code> &lt;uses-sdk android:minSdkVersion=&quot;14&quot; /&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CHANGE_WIFI_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CHANGE_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre><p>注:<br>android.permission.ACCESS_WIFI_STATE       允许程序访问Wi-Fi网络状态信息(Allows applications to access information about Wi-Fi networks)<br>android.permission.CHANGE_WIFI_STATE      允许程序改变Wi-Fi连接状态(Allows applications to change Wi-Fi connectivity state)<br>android.permission.INTERNET                           当需要访问网络的时候，需要在AndroidManifest.xml里面添加访问网络的权限</p>
+<p><strong>二、创建广播接收器</strong><br>首先在MainActivity中初始化IntentFilter并让它监听以下动作:<br>WIFI_P2P_STATE_CHANGED_ACTION</p>
+<ul>
+<li>表明Wi-Fi对等网络（P2P）是否已经启用<br>WIFI_P2P_PEERS_CHANGED_ACTION</li>
+<li>表明可用的对等点的列表发生了改变<br>WIFI_P2P_CONNECTION_CHANGED_ACTION</li>
+<li>表示Wi-Fi对等网络的连接状态发生了改变<br>WIFI_P2P_THIS_DEVICE_CHANGED_ACTION</li>
+<li>表示该设备的配置信息发生了改变</li>
+</ul>
+<pre><code> private void initIntentFilter() {
+        mFilter = new IntentFilter();
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);
+        mFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+    }
+</code></pre><p>然后我们创建一个新的广播类</p>
+<pre><code>public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
+
+    private WifiP2pManager mManager;
+    private WifiP2pManager.Channel mChannel;
+    private Activity mActivity;
+    private WifiP2pManager.PeerListListener mPeerListListener;
+    private WifiP2pManager.ConnectionInfoListener mInfoListener;
+
+    public WifiDirectBroadcastReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel, Activity activity,
+                                       WifiP2pManager.PeerListListener peerListListener,
+                                       WifiP2pManager.ConnectionInfoListener infoListener
+    ) {
+        this.mManager = manager;
+        this.mChannel = channel;
+        this.mPeerListListener = peerListListener;
+        this.mActivity = activity;
+        this.mInfoListener = infoListener;
+    }
+
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        String action = intent.getAction();
+
+        /*check if the wifi is enable*/
+        if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
+            int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
+             if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {  
+                activity.setIsWifiP2pEnabled(true);  
+            } else {  
+                activity.setIsWifiP2pEnabled(false);  
+            }  
+        }
+        /*get the list*/
+        else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+
+            mManager.requestPeers(mChannel, mPeerListListener);
+        }
+        /*查看当前是否处于查找状态
+        * get the state of discover*/
+        else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
+
+            int State = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE, -1);
+
+            if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED)
+                Toast.makeText(mActivity, &quot;搜索开启&quot;, Toast.LENGTH_SHORT).show();
+            else if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED)
+                Toast.makeText(mActivity, &quot;搜索已关闭&quot;, Toast.LENGTH_SHORT).show();
+
+        }
+        /*Respond to new connection or disconnections
+        *查看是否创建连接*/
+        else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+
+            if (mManager == null) {
+                return;
+            }
+
+            NetworkInfo networkInfo = (NetworkInfo) intent
+                    .getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+
+            if (networkInfo.isConnected()) {
+                Log.i(&quot;xyz&quot;, &quot;已连接&quot;);
+                mManager.requestConnectionInfo(mChannel, mInfoListener);
+            } else {
+                Log.i(&quot;xyz&quot;, &quot;断开连接&quot;);
+                return;
+            }
+        }
+
+        /*Respond to this device&#39;s wifi state changing*/
+        else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
+        }
+    }
+}
+</code></pre><p>构造函数中的manager以及channel比较好理解，剩下的主要是在mainActivity中的方法的实现<br>第一个action用于检测当前设备的wifi是否打开很好理解<br>第二个action当你开始搜索之后，当设备列表发生变化的时候即触发通过mManager.requestPeers(mChannel, mPeerListListener);方法可以的到列表，这些我们下文详讲<br>第三个action用于检测当前是否处于搜索状态，<br>第四个action用于检测两个设备连接状态是否改变<br>第五个action适用于设备名称发生改变这里我们不讲</p>
+<p><strong>三、创建搜索，获得列表</strong><br>ok 广播搭建好之后，我们就要初始化一个p2p了</p>
+<p>首先在MainActivity中创建一个Manager以及一个Channel</p>
+<pre><code>
+private WifiP2pManager mManager;
+private WifiP2pManager.Channel mChannel;
+mManager = (WifiP2pManager) getSystemService(WIFI_P2P_SERVICE);
+mChannel = mManager.initialize(this, Looper.myLooper(), null);
+</code></pre><p>这样我们就开启了direct服务<br>下面我们定义搜索函数</p>
+<pre><code>   private void DiscoverPeers() {
+        mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onFailure(int reason) {
+            }
+        });
+    }
+</code></pre><p>这里面的success以及failure没有任何实质的信息，只是提醒你调用这个方法是否成功，而不代表开启搜索是否成功，要监听搜索的状态，如上文所述我们要在广播中实现</p>
+<pre><code>else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
+
+            int State = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE, -1);
+
+            if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED)
+                Toast.makeText(mActivity, &quot;搜索开启&quot;, Toast.LENGTH_SHORT).show();
+            else if (State == WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED)
+                Toast.makeText(mActivity, &quot;搜索已关闭&quot;, Toast.LENGTH_SHORT).show();
+
+        }
+</code></pre><p>ok开启搜索服务之后，当找到一个设备后，设备列表就会发生改变，这个时候就会触发广播中的第二个action</p>
+<pre><code>else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+
+            mManager.requestPeers(mChannel, mPeerListListener);
+        }
+</code></pre><p>通过requestPeers(mChannel, mPeerListListener)再通过监听器中的onPeersAvailable方法就可以得到设备列表，当让我们想在主界面中显示列表，因此监听器我们在activity中实现然后通过传参的方式传入到广播之中，</p>
+<pre><code> WifiP2pManager.PeerListListener mPeerListListerner = new WifiP2pManager.PeerListListener() {
+            @Override
+            public void onPeersAvailable(WifiP2pDeviceList peersList) {
+                peers.clear();
+                peersshow.clear();
+                Collection&lt;WifiP2pDevice&gt; aList = peersList.getDeviceList();
+                peers.addAll(aList);
+
+                for (int i = 0; i &lt; aList.size(); i++) {
+                    WifiP2pDevice a = (WifiP2pDevice) peers.get(i);
+                    HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+                    map.put(&quot;name&quot;, a.deviceName);
+                    map.put(&quot;address&quot;, a.deviceAddress);
+                    peersshow.add(map);
+                }
+                mAdapter = new MyAdapter(peersshow);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager
+                        (MainActivity.this));
+                mAdapter.SetOnItemClickListener(new MyAdapter.OnItemClickListener() {
+                    @Override
+                    public void OnItemClick(View view, int position) {
+                        CreateConnect(peersshow.get(position).get(&quot;address&quot;),
+                                peersshow.get(position).get(&quot;name&quot;));
+
+                    }
+
+                    @Override
+                    public void OnItemLongClick(View view, int position) {
+
+                    }
+                });
+            }
+        };
+</code></pre><p>这是在Activity中的实现，得到List的方法有很多，我使用了RecyclerView感觉游侠笨重，一定有其他好的方法。<br>单击每一个设备我所写的Adapter就会返回出来它的MAC地址，通过地址我们就可以来连接设备了<br><strong>三、创建连接</strong></p>
+<p>创建连接我们调用manager中的connect方法，如果连接之前没有创建一个组，系统会自动创建一个组，并且随机分配谁是GroupOwner即谁是组长，这也关系到谁是客户端谁是服务器，<br>connect方法官方文档解释<br>If the current device is part of an existing p2p group or has created</p>
+<pre><code> * a p2p group with {@link #createGroup}, an invitation to join the group is sent to
+ * the peer device.
+</code></pre><p>我们写一个方法来创建Group，在两个设备中谁调用这个方法，谁就是组长这样就实现了设定谁是服务器与客户端</p>
+<pre><code> private void BeGroupOwener() {
+        mManager.createGroup(mChannel, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int reason) {
+
+            }
+        });
+    }
+</code></pre><pre><code> private void CreateConnect(String address, final String name) {
+        WifiP2pDevice device;
+        WifiP2pConfig config = new WifiP2pConfig();
+        Log.i(&quot;xyz&quot;, address);
+
+        config.deviceAddress = address;
+        /*mac地址*/
+
+        config.wps.setup = WpsInfo.PBC;
+        Log.i(&quot;address&quot;, &quot;MAC IS &quot; + address);
+        if (address.equals(&quot;9a:ff:d0:23:85:97&quot;)) {
+            config.groupOwnerIntent = 0;
+            Log.i(&quot;address&quot;, &quot;lingyige shisun&quot;);
+        }
+        if (address.equals(&quot;36:80:b3:e8:69:a6&quot;)) {
+            config.groupOwnerIntent = 15;
+            Log.i(&quot;address&quot;, &quot;lingyigeshiwo&quot;);
+
+        }
+
+        Log.i(&quot;address&quot;, &quot;lingyige youxianji&quot; + String.valueOf(config.groupOwnerIntent));
+
+        mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int reason) {
+
+
+            }
+        });
+    }
+</code></pre><p>Wifip2pconfi这个类官方解释是<br>A class representing a Wi-Fi P2p configuration for setting up a connection<br>有道翻译 一个类代表一个wi - fi P2p配置为建立一个连接<br>其实是一个类用来储存p2p设备的信息，我们把其中的Address值改为想要链接设备的Mac地址就可以得到设备的实例，</p>
+<pre><code> mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(int reason) {
+
+
+            }
+        });
+</code></pre><p>调用connect方法，实现连接，如上文所述，这里的sucess,以及failure都是表示函数的成功与否，要看是否连接还要到广播之中</p>
+<pre><code> else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+
+            if (mManager == null) {
+                return;
+            }
+
+            NetworkInfo networkInfo = (NetworkInfo) intent
+                    .getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+
+            if (networkInfo.isConnected()) {
+                Log.i(&quot;xyz&quot;, &quot;已连接&quot;);
+                mManager.requestConnectionInfo(mChannel, mInfoListener);
+            } else {
+                Log.i(&quot;xyz&quot;, &quot;断开连接&quot;);
+                return;
+            }
+        }
+</code></pre><p>NetWorkInfo方法Describes the status of a network interface. 用来描述网络接口的状态<br>当网络连接时我们调用此方法mManager.requestConnectionInfo(mChannel, mInfoListener);就可让服务器端开始接受数据了，这里在下文中也会详讲。</p>
+<p><strong>四、传输数据前的准备</strong><br>上文讲到mManager.requestConnectionInfo(mChannel, mInfoListener);方法<br>第二个参数是ConnectionInfoListener类<br>Interface for callback invocation when connection info is available用来当connect成功后回掉，跟上一个得List的监听器一样，我们也在MainActivity中实现，然后通过传参到广播之中</p>
+<pre><code>        WifiP2pManager.ConnectionInfoListener mInfoListener = new WifiP2pManager.ConnectionInfoListener() {
+
+            @Override
+            public void onConnectionInfoAvailable(final WifiP2pInfo minfo) {
+
+                Log.i(&quot;xyz&quot;, &quot;InfoAvailable is on&quot;);
+                info = minfo;
+                TextView view = (TextView) findViewById(R.id.tv_main);
+                if (info.groupFormed &amp;&amp; info.isGroupOwner) {
+                    Log.i(&quot;xyz&quot;, &quot;owmer start&quot;);
+
+                    mServerTask = new FileServerAsyncTask(MainActivity.this, view);
+                    mServerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                    mDataTask = new DataServerAsyncTask(MainActivity.this, view);
+                    mDataTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                } else if (info.groupFormed) {
+                    SetButtonVisible();
+                }
+            }
+        };
+</code></pre><p>我们看一下下面这核心代码</p>
+<pre><code> if (info.groupFormed &amp;&amp; info.isGroupOwner) {
+                    Log.i(&quot;xyz&quot;, &quot;owmer start&quot;);
+
+                    mServerTask = new FileServerAsyncTask(MainActivity.this, view);
+                    mServerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                    mDataTask = new DataServerAsyncTask(MainActivity.this, view);
+                    mDataTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                }
+                else if (info.groupFormed) {
+                    SetButtonVisible();
+                }
+</code></pre><p>我们使用的传输方式是UDP模型在这个Demo中只能从客户端向服务器端发送消息<br>ok知道这个前提之后我们看<br>第一个判断：如果组已经建立，并且是组长，也就是说当前设备是服务器，我们开启两个AsyncTask分别用来接收图片以及字符串，当然看完这篇博客之后你可以传输各种类型的数据，这里仅以这两个举例<br>AsyncTask怎么写我们后面再说，<br>看第二个判断：如果组建立了，但不是组长，也就是说当前设备是客户端，这个时候我们让两个发送Button可见，也就是说一开始所有的设备界面都是一样的没有发送数据的按钮，但判断出谁是客户端之后，我们就将发送按钮展现出来。<br>上截图<br><img src="http://img.blog.csdn.net/20160323194043700" alt="客户端界面"><br><img src="http://img.blog.csdn.net/20160323194121919" alt="服务器端界面"><br>ok搜索连接都讲完了，下面就是大头传送数据了<br><strong>五、传输数据</strong><br><strong>1.客户端 发送服务的编写</strong><br>Activity中设置发送图片按钮的监听器</p>
+<pre><code> sendpicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType(&quot;image/*&quot;);
+                startActivityForResult(intent, 20);
+
+            }
+        });
+</code></pre><p>Intent intent = new Intent(Intent.ACTION_GET_CONTENT)<br>官方文档Allow the user to select a particular kind of data and return it.<br>这个Intent会打开文件管理器<br>intent.setType(“image/*”); 这个语句决定着以什么方式打开，我们设以图片方式打开，启动Activity后我们选择好图片，之后Activity关闭自动调用onActivityResult</p>
+<pre><code> @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 20) {
+            super.onActivityResult(requestCode, resultCode, data);
+            Uri uri = data.getData();
+            Intent serviceIntent = new Intent(MainActivity.this,
+                    FileTransferService.class);
+
+            serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
+            serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH,
+                    uri.toString());
+
+            serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,
+                    info.groupOwnerAddress.getHostAddress());
+            serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT,
+                    8988);
+            MainActivity.this.startService(serviceIntent);
+        }
+    }
+</code></pre><p>Uri uri = data.getData();获得图片所在位置<br>serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH,uri.toString());将位置传入Service<br>serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,info.groupOwnerAddress.getHostAddress());传入组长的IP地址，用来创建Socket端口<br>serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT,8988);传入端口port<br>ok下面我们看服务究竟怎么写</p>
+<pre><code>public class FileTransferService extends IntentService {
+
+    private static final int SOCKET_TIMEOUT = 5000;
+    public static final String ACTION_SEND_FILE = &quot;com.example.android.wifidirect.SEND_FILE&quot;;
+    public static final String EXTRAS_FILE_PATH = &quot;sf_file_url&quot;;
+    public static final String EXTRAS_GROUP_OWNER_ADDRESS = &quot;sf_go_host&quot;;
+    public static final String EXTRAS_GROUP_OWNER_PORT = &quot;sf_go_port&quot;;
+
+    public FileTransferService(String name) {
+        super(name);
+    }
+
+    public FileTransferService() {
+        super(&quot;FileTransferService&quot;);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.app.IntentService#onHandleIntent(android.content.Intent)
+     */
+    @Override
+    protected void onHandleIntent(Intent intent) {
+
+        Context context = getApplicationContext();
+        if (intent.getAction().equals(ACTION_SEND_FILE)) {
+            String fileUri = intent.getExtras().getString(EXTRAS_FILE_PATH);
+
+            String host = intent.getExtras().getString(
+                    EXTRAS_GROUP_OWNER_ADDRESS);
+
+            Socket socket = new Socket();
+
+            int port = intent.getExtras().getInt(EXTRAS_GROUP_OWNER_PORT);
+
+            try {
+                Log.d(&quot;xyz&quot;, &quot;Opening client socket - &quot;);
+                socket.bind(null);
+                socket.connect((new InetSocketAddress(host, port)),
+                        SOCKET_TIMEOUT);
+
+                Log.d(&quot;xyz&quot;,
+                        &quot;Client socket - &quot; + socket.isConnected());
+
+                /*returns an output stream to write data into this socket*/
+                OutputStream stream = socket.getOutputStream();
+                ContentResolver cr = context.getContentResolver();
+                InputStream is = null;
+                try {
+                    is = cr.openInputStream(Uri.parse(fileUri));
+                } catch (FileNotFoundException e) {
+                    Log.d(&quot;xyz&quot;, e.toString());
+                }
+                FileServerAsyncTask.copyFile(is, stream);
+                Log.d(&quot;xyz&quot;, &quot;Client: Data written&quot;);
+            } catch (IOException e) {
+                Log.e(&quot;xyz&quot;, e.getMessage());
+            } finally {
+                if (socket != null) {
+                    if (socket.isConnected()) {
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+                            // Give up
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre><p>socket.connect((new InetSocketAddress(host, port)),<br>                        SOCKET_TIMEOUT);创建Socket连接</p>
+<pre><code>    /*returns an output stream to write data into this socket*/
+                OutputStream stream = socket.getOutputStream();
+                ContentResolver cr = context.getContentResolver();
+                InputStream is = null;
+                try {
+                    is = cr.openInputStream(Uri.parse(fileUri));
+                } catch (FileNotFoundException e) {
+                    Log.d(&quot;xyz&quot;, e.toString());
+                }
+                FileServerAsyncTask.copyFile(is, stream);
+</code></pre><p>将is copy到stream中ok这样我们的服务就启动成功了，至于怎么接收先不细讲，先看一下AsyncTask<br><strong>2、服务器端 AsyncTask的编写</strong></p>
+<pre><code>public class FileServerAsyncTask extends
+        AsyncTask&lt;Void, Void, String&gt; {
+
+    private Context context;
+    private TextView statusText;
+
+    /**
+     * @param context
+     * @param statusText
+     */
+    public FileServerAsyncTask(Context context, View statusText) {
+        this.context = context;
+        this.statusText = (TextView) statusText;
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
+        try {
+            Log.i(&quot;xyz&quot;, &quot;file doinback&quot;);
+            ServerSocket serverSocket = new ServerSocket(8988);
+            Socket client = serverSocket.accept();
+            final File f = new File(
+                    Environment.getExternalStorageDirectory() + &quot;/&quot;
+                            + &quot;com.miko.zd&quot; + &quot;/wifip2pshared-&quot;
+                            + System.currentTimeMillis() + &quot;.jpg&quot;);
+
+            File dirs = new File(f.getParent());
+
+            if (!dirs.exists())
+                dirs.mkdirs();
+            f.createNewFile();
+
+
+                /*Returns an input stream to read data from this socket*/
+            InputStream inputstream = client.getInputStream();
+            copyFile(inputstream, new FileOutputStream(f));
+            serverSocket.close();
+            return f.getAbsolutePath();
+
+        } catch (IOException e) {
+            Log.e(&quot;xyz&quot;, e.toString());
+            return null;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+     */
+    @Override
+    protected void onPostExecute(String result) {
+
+        Log.i(&quot;xyz&quot;, &quot;file onpost&quot;);
+        Toast.makeText(context, &quot;result&quot;+result, Toast.LENGTH_SHORT).show();
+
+        if (result != null) {
+            statusText.setText(&quot;File copied - &quot; + result);
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse(&quot;file://&quot; + result), &quot;image/*&quot;);
+            context.startActivity(intent);
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.os.AsyncTask#onPreExecute()
+     */
+    @Override
+    protected void onPreExecute() {
+
+    }
+
+
+    public static boolean copyFile(InputStream inputStream, OutputStream out) {
+        byte buf[] = new byte[1024];
+        int len;
+        try {
+            while ((len = inputStream.read(buf)) != -1) {
+                out.write(buf, 0, len);
+
+            }
+            out.close();
+            inputStream.close();
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
+    }
+}
+</code></pre><p>AsyncTask原理大家应该很清楚这里不细说，不懂Google=_=+///<br>ok先看doInbackGround<br> ServerSocket serverSocket = new ServerSocket(8988);创建Socket<br> Socket client = serverSocket.accept();这句很关键，<br> accept方法<br> Waits for an incoming request and blocks until the connection is opened.<br> This method returns a socket object representing the just opened connection.<br> 也就说等待连接之前这里是阻塞的，线程停止，当然不会调用下面的onPostExecute，<br> 这一点很关键我们梳理一下，找到设备，点击设备进行连接后ConnectionInfoListener监听器触发，调用方法</p>
+<pre><code>onConnectionInfoAvailable{
+ if (info.groupFormed &amp;&amp; info.isGroupOwner) {
+                    Log.i(&quot;xyz&quot;, &quot;owmer start&quot;);
+
+                    mServerTask = new FileServerAsyncTask(MainActivity.this, view);
+                    mServerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    }
+                    }
+</code></pre><p>这个时候Task就启动了，当然它会在 Socket client = serverSocket.accept()这里阻塞</p>
+<p>这个时候，我们点击发送数据按钮启动服务，socket.connect((new InetSocketAddress(host, port)),<br>                        SOCKET_TIMEOUT);<br>  这时候创建连接，阻塞取消，然后就会尽心之后的copy保存了</p>
+<p>ok博主是大二党，计算机科学与技术专业，这搞笑的专业，完全自学，每天学一点，好吧这一点有时候是10个钟头，但自己就能感觉到进步，起码打字快了吧=——=，虽然blog很耗费时间，但我坚信这是一种学习的好方法。                 </p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/03/Android-通过Java代码生成创建界面。/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
+    
+
+
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/03/Hello-Hexo/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
+
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p >Copyright ©  2017  M1ko</p>
+<p >Powered by <a href="https://hexo.io/" target="_blank"> Hexo </a> & Theme - <a href="https://github.com/moumao/hexo-theme-Vateral" target="_blank">Vateral</a></p>
+<p style="font-size: 10px" id="footer-times" data-time="5/1/2017 00:00:00"></p>
+<script>
+    var beginTime=document.getElementById("footer-times").dataset.time
+    function show_date_time(){
+        var span=document.getElementById("footer-times")
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay=new Date(beginTime);//初始日期
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=Math.floor(e_hrsold);
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=Math.floor((e_hrsold-hrsold)*60);
+        seconds=Math.floor((e_minsold-minsold)*60);
+        span.innerHTML="本站已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+    }
+    show_date_time();
+</script>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/lazyload.min.js"></script>
+
+<script src="/js/jquery.rotate.min.js"></script>
+
+<script src="/js/Vateral.min.js"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

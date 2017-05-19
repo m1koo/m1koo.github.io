@@ -122,17 +122,73 @@
 
 <div id="content-outer">
   <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a3.jpg)" >
+  <h2>Android Uri获取真实路径以及文件名的方法</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-02T03:41:30.000Z">
+          2017-05-02
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>在Android 编程中经常会用到uri转化为文件路径<br>下面是4.4后通过Uri获取路径以及文件名一种方法</p>
+<pre><code> public static String getRealFilePath( final Context context, final Uri uri ) {
+        if ( null == uri ) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if ( scheme == null )
+            data = uri.getPath();
+        else if ( ContentResolver.SCHEME_FILE.equals( scheme ) ) {
+            data = uri.getPath();
+        } else if ( ContentResolver.SCHEME_CONTENT.equals( scheme ) ) {
+            Cursor cursor = context.getContentResolver().query( uri, new String[] { MediaStore.Images.ImageColumns.DATA }, null, null, null );
+            if ( null != cursor ) {
+                if ( cursor.moveToFirst() ) {
+                    int index = cursor.getColumnIndex( MediaStore.Images.ImageColumns.DATA );
+                    if ( index &gt; -1 ) {
+                        data = cursor.getString( index );
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+</code></pre><p>等到的路径 /storage/emulated/0/图片/浪费-林宥嘉.mp3</p>
+<p>怎么获取文件名呢？</p>
+<pre><code> String path=&quot;/storage/emulated/0/图片/浪费-林宥嘉.mp3&quot;;
+                String b = path.substring(path.lastIndexOf(&quot;/&quot;) + 1, path.length());
+</code></pre><p>通过索引最后一个/就可以在String中截取了</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/03/Hello-Hexo/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
-<div class="tags">
-  
-    <div id="archive">
-        
-          <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-动态化开发/">Android 动态化开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-校园网登录/">Android 校园网登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello/">Hello</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua基础语法/">Lua基础语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM架构最终配置-Spring回滚机制/">SSM架构最终配置 Spring回滚机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timestamp-有两个默认值/">Timestamp 有两个默认值</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uri真实路径/">Uri真实路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WifiDirect/">WifiDirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp-xml小于号-Mybatisdao多参数/">timestamp xml小于号 Mybatisdao多参数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二进制一个数/">二进制一个数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股神算法/">股神算法</a></li></ul>
-        
-    </div>
-  
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/02/Java算法之-股神/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
 
   </div>
 </div>

@@ -122,17 +122,62 @@
 
 <div id="content-outer">
   <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a11.jpg)" >
+  <h2>Lua基础语句总结</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-19T18:01:30.000Z">
+          2017-05-20
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>–print(“hello world”)</p>
+<p>–<br>–函数<br>–与c java相同传入的是值<br>function method(a,b)<br>    temp = a<br>    a=b<br>    b=temp<br>    print(a,b)<br>end</p>
+<p>–<br>–数组（字典）<br>–array[1] 的时候无法使用array.1<br>array ={}<br>array[“key”] = “fa”<br>print(array.key)</p>
+<p>–<br>–循环<br>– c中的do while<br>local i = 0<br>repeat<br>    i = i+1<br>    print(“repeat 循环”)<br>    until(i&gt;2)</p>
+<p>–for<br>–for 步长<br>for var = 1,6,2.5 do<br>    print(“for步长循环”)<br>end</p>
+<p>–字典循环<br>days = {“faf”,”fdaee”,”ere”}<br>days[1] = “fdafafadfdafad”<br>for i,v in ipairs(days) do<br>    print(i,v)<br>end</p>
+<p>–判断<br>if(0) then<br>    print(“0是true”)<br>end</p>
+<p>–函数返回多个值<br>function m(a,b)<br>    return b,a<br>end</p>
+<p>c,d = m(1,3)<br>print(“函数的多个返回值”,c,d)</p>
+<p>–逻辑运算符<br>–and or not<br>–每一个变量对应着 一个值，b = false<br>a,b = true</p>
+<p>if a and b then<br>    print(“a and b”)<br>end</p>
+<p>if a or b then<br>    print(“a or b”)<br>end</p>
+<p>if a and not b then<br>    print(“not a and b”)<br>end</p>
+<p>–连接字符串<br>a=’hello ‘ b=’miko’<br>print(a..b)<br>print(“#表示字符串长度”,#a)</p>
+<p>–String 操作<br>str = “Hello WORLD”<br>–全部大小写<br>print(string.upper(str))<br>print(string.lower(str))<br>–替换<br>print(string.gsub(str,’llo’,’heh’))</p>
+<p>print(string.find(str,’e’))<br>–反转<br>print(string.reverse(str))</p>
+<p>–面向对象<br>– Meta class<br>Shape = {area = 0}</p>
+<p>– 基础类方法 new<br>function Shape:new (o,side)<br>  o = o or {}<br>  setmetatable(o, self)<br>  self.__index = self<br>  side = side or 0<br>  self.area = side*side;<br>  return o<br>end</p>
+<p>– 基础类方法 printArea<br>function Shape:printArea ()<br>  print(“面积为 “,self.area)<br>end</p>
+<p>– 创建对象<br>myshape = Shape:new(nil,10)</p>
+<p>myshape:printArea()</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
     
 
 
-<div class="tags">
-  
-    <div id="archive">
-        
-          <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-动态化开发/">Android 动态化开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-校园网登录/">Android 校园网登录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello/">Hello</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lua基础语法/">Lua基础语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSM架构最终配置-Spring回滚机制/">SSM架构最终配置 Spring回滚机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Timestamp-有两个默认值/">Timestamp 有两个默认值</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Uri真实路径/">Uri真实路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WifiDirect/">WifiDirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp-xml小于号-Mybatisdao多参数/">timestamp xml小于号 Mybatisdao多参数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二进制一个数/">二进制一个数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/股神算法/">股神算法</a></li></ul>
-        
-    </div>
-  
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/06/Java后台学习记录-Timestamp-有两个默认值/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
 
   </div>
 </div>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="m1ko">
+  <meta name="description" content="M1ko&#39;s Blog">
+  
+  <title>M1ko</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/Vateral.min.css">
+    
+  
+  
+    <style type="text/css">
+        html{
+            font-family: sans-serif;
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: url(/fonts/MaterialIcons-Regular.eot);
+            src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+        }
+    </style>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<body>
+<div class="progress" >
+    <div class="indeterminate"></div>
+</div>
+<a data-activates="slide-out"  class="button-collapse"><div class="nav-btn"><i class="material-icons">list</i></div></a>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/left.jpg)">
+    <div class="header-box"><img src="/images/icon.jpg" ondragstart="return false;"></div>
+    <p>Miko</p>
+    <div class="nav-link">
+        
+        
+        <a  href="https://github.com/m1koo" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:136057505@qq.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://weibo.com/u/5269244323/home?wvr=5&amp;uut=fin&amp;from=reg" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2017/05/">五月 2017<span class="archive-count">11</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<li class="nav-list dropdown-btn">
+    <a   class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">dashboard</i></div><p>分类</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="category-link" href="/categories/Android/">Android<span class="category-count">4</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/Hello/">Hello<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/Java后台/">Java后台<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/Lua/">Lua<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/算法/">算法<span class="category-count">2</span></a>
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<!--about-->
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    <article id="post">
+  <div class="post-page-title" style="background-image:url(/images/a5.jpg)" >
+  <h2>Android 通过Java代码生成创建界面。</h2>
+    
+  <p>作者:Miko &nbsp&nbsp 发布于:<time datetime="2017-05-03T04:41:30.000Z">
+          2017-05-03
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>大家好，我是Miko，前一段时间一直在忙实习，很久没有更新博客了，这一段时间准备复习准备期末考试（预习课本），复习（预习）的差不多了=_=+////，因此抽出点时间，对前一段时间的工作以及学习进行一定的总结。<br>废话不多说，本文将会层层深入给大家讲解如何动态的生成一个完整的界面。</p>
+<p><strong>本文内容：</strong></p>
+<ol>
+<li><strong>Java代码中动态生成View</strong></li>
+<li><strong>Java代码中动态设置View的位置，以及其他的属性</strong></li>
+<li><strong>LayoutParams详解</strong></li>
+</ol>
+<h2 id="一、Java代码中动态的生成View"><a href="#一、Java代码中动态的生成View" class="headerlink" title="一、Java代码中动态的生成View"></a>一、Java代码中动态的生成View</h2><p>我们以创建一个Button为例子。<br><strong>1、首先我们在onCreate方法中创建一个Button实例：</strong></p>
+<pre><code>Button button=new Button(this);
+</code></pre><p><strong>2、创建了Button实例下面我们就要指定它在哪个界面中显示：</strong><br>首先第一步找到我们要显示的界面：<br>首先把setContentView（）删掉（后文会讲）。<br>有两种方法：</p>
+<ul>
+<li><strong>使用LayoutInflate</strong></li>
+<li><strong>使用findViewById</strong></li>
+</ul>
+<p><em>1）LayoutInflate使用来找到一个布局文件：</em></p>
+<pre><code>      ViewGroup viewGroup = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.activity_main, null);
+</code></pre><p>返回的是布局文件的最外层的View容器，<br>贴一下布局文件中的XML代码</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+    tools:context=&quot;com.miko.zd.dynamicview.MainActivity&quot;
+    android:id=&quot;@+id/relative&quot;&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>这里LayoutInflate返回的就是最外层的RelativeLayout。RelativeLayout继承于ViewGroup因此完全没有问题。<br><em>2）通过FindViewByID返回最外层的View</em><br>第二种方法以第一种一致都是返回最外层的RelativeLayout：</p>
+<pre><code>        View viewGroup2 = findViewById(R.id.relative);
+</code></pre><p><strong>3、下一步就是要把我们的Button添加到RelativeLayout中了</strong><br>使用ViewGroup的addView方法：</p>
+<pre><code> viewGroup.addView(button);
+</code></pre><p>运行代码，你会发现界面中什么都没有，为什么呢？<br>前文中说过删除setContentView（）这个方法，setContenView可以理解为，为Activity绑定一个显示的的布局，我们只是找到了ViewGroup，并且添加了Button，但是没有绑定Activity，因此这里添加一句setContentView(viewGroup)；你可能会说，我一开始不删除这一句，不可以么？<br>findViewById可以，setContentView()一旦调用，layout就会立刻显示UI，而后的findViewById，找到RelativeLayout实际上已经加载出来了，添加Button，可以理解为显示出UI后动态的添加View；而inflate只会把Layout形成一个以view类实现成的对象，有需要时再用setContentView(view)显示出来。<br>运行结果：<br><img src="http://img.blog.csdn.net/20160627115016387" alt="这里写图片描述"><br>可以看到，相当原始的界面，下一步我们就要设置Button的位置以及相关属性了</p>
+<h2 id="二、Java代码中动态设置View的位置，以及其他的属性"><a href="#二、Java代码中动态设置View的位置，以及其他的属性" class="headerlink" title="二、Java代码中动态设置View的位置，以及其他的属性"></a>二、Java代码中动态设置View的位置，以及其他的属性</h2><p><strong>1、首先我们为我们的Button设置一个背景，以及文字：</strong></p>
+<pre><code>button.setBackgroundColor(Color.RED);
+button.setText(&quot;Hello World&quot;);
+</code></pre><p><img src="http://img.blog.csdn.net/20160627115621608" alt="这里写图片描述"><br><strong>2、我们下一步想给Button设置长宽：</strong><br>你可能会想button会有setHeight，setWidth方法，确实有，而且你可以实现设置长宽，但是如果你要设置Match_parent，Wrap_content，怎么实现呢？这时候我们就要使用LayoutParam方法了。<br>首先创建一个Layoutparams实例：</p>
+<pre><code>RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(100,100);
+</code></pre><p>不同的布局对应着不同的LayoutParams，我们这里是RelativeLayout所以当然是R.layoutParam这里的两个参数是Button的宽以及高，注意这里的100代表着100px，使用dp可以参照我之前的博客<br><a href="http://blog.csdn.net/mikogodzd/article/details/51142427" target="_blank" rel="external">dp转px</a></p>
+<p>那么上文中的MATCH 以及WRAP怎么实现呢？</p>
+<pre><code>RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+</code></pre><p>运行结果：<img src="http://img.blog.csdn.net/20160627120652812" alt="这里写图片描述"><br>为什么没有效果呢，因为定义了LayoutParam但是没有指定哪一个View因此还需要添加一句</p>
+<pre><code>        button.setLayoutParams(params);
+</code></pre><p><img src="http://img.blog.csdn.net/20160627120844004" alt="这里写图片描述"><br>没有任何问题。<br><strong>3、设置位置信息</strong><br>我们想要使Button居中显示，怎么实现呢？<br>还是使用LayoutParams，使用他的addRules方法：</p>
+<pre><code>        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+</code></pre><p><img src="http://img.blog.csdn.net/20160627121702321" alt="这里写图片描述"><br>addRules有两个方法：</p>
+<ul>
+<li>addRule(int verb)</li>
+<li>addRule(int verb, int anchor)<br>verb我们很好理解，就是各种规定位置的参数，anchor代表什么呢？<br>我们看源码注释：<br>The id of another view to use as an anchor,<pre><code>  *        or a boolean value (represented as {@link RelativeLayout#TRUE}
+  *        for true or 0 for false).  For verbs that don&#39;t refer to another sibling
+  *        (for example, ALIGN_WITH_PARENT_BOTTOM) just use -1.
+</code></pre>实际上verb参数可以分为两类，一种是不要任何相对view的，比如ALIGN_WITH_PARENT_BOTTOM这种的参数，另一种需要相对view的参数，例如above，right_of等等，需要一个view来表示位置的参数，这个时候就需要用到anchor，anchor代表的是相对view的id。<br>下面我们再创建一个Button:</li>
+</ul>
+<pre><code>ViewGroup viewGroup2 = (ViewGroup) viewGroup.findViewById(R.id.relative);
+
+        Button button = new Button(this);
+        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        button.setLayoutParams(params);
+        button.setBackgroundColor(Color.RED);
+        button.setText(&quot;Hello World&quot;);
+        button.setId(100);
+
+        Button button1=new Button(this);
+        RelativeLayout.LayoutParams params1=new RelativeLayout.LayoutParams(200,200);
+        params1.addRule(RelativeLayout.BELOW,100);
+        button1.setLayoutParams(params1);
+        button1.setBackgroundColor(Color.RED);
+        button1.setText(&quot;Hello World&quot;);
+
+        viewGroup2.addView(button);
+        viewGroup2.addView(button1);
+        setContentView(viewGroup);
+</code></pre><p>注意我们要先给第一个button一个id，因为是动态创建的所以使用setId方法，设id为100， params1.addRule(RelativeLayout.BELOW,100);核心代码，意思是将button1设置在id为100的view的下方。<br>运行结果：<br><img src="http://img.blog.csdn.net/20160627122907857" alt="这里写图片描述"></p>
+<h2 id="四、后记"><a href="#四、后记" class="headerlink" title="四、后记"></a>四、后记</h2><p>上文我为大家详细解析了View的动态创建，以及动态的添加属性，有几点需要注意的：<br>1、上文中的布局都是用的RelativeLayout，实际上你会发现只有RelativeLayout.layoutParam具有addRules方法，这其实是与XML中相对应的，你在LinearLayout中无法使用Right_of等等相对布局的属性，这些都是相通的。    实际上我认为在动态生成界面的几个布局中RelativeLayout是最简单也是最准确的。<br>2、为什么要使用动态生成界面？我想在编程中使用XML是无可厚非的，但是App的大趋势是动态化来减少版本更替，这就涉及到一个不要写死的问题，国内已经有很多尝试，即通过服务器动态生成界面。如果你有兴趣，并且深入实践过，可以加我的qq，探讨：136057505<br>3、博主大二党，如果有什么错误欢迎指正=-=。</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2017/05/05/Java算法之-二进制1的个数问题-位运算/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
+    
+
+
+  <!-- Next Nav -->
+    
+  <a href="/2017/05/03/Android-WifiDirect中文最强详解/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、Java代码中动态的生成View"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、Java代码中动态的生成View</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、Java代码中动态设置View的位置，以及其他的属性"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、Java代码中动态设置View的位置，以及其他的属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、后记"><span class="post-toc-number">3.</span> <span class="post-toc-text">四、后记</span></a></li></ol>
+</div>
+<div class="post-back"><i class="material-icons">arrow_back</i></div>
+
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p >Copyright ©  2017  M1ko</p>
+<p >Powered by <a href="https://hexo.io/" target="_blank"> Hexo </a> & Theme - <a href="https://github.com/moumao/hexo-theme-Vateral" target="_blank">Vateral</a></p>
+<p style="font-size: 10px" id="footer-times" data-time="5/1/2017 00:00:00"></p>
+<script>
+    var beginTime=document.getElementById("footer-times").dataset.time
+    function show_date_time(){
+        var span=document.getElementById("footer-times")
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay=new Date(beginTime);//初始日期
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=Math.floor(e_hrsold);
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=Math.floor((e_hrsold-hrsold)*60);
+        seconds=Math.floor((e_minsold-minsold)*60);
+        span.innerHTML="本站已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+    }
+    show_date_time();
+</script>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/lazyload.min.js"></script>
+
+<script src="/js/jquery.rotate.min.js"></script>
+
+<script src="/js/Vateral.min.js"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>
